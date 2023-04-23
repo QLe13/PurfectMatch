@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import FilterSearch from './screens/FilterSearch/FilterSearch';
 import UserProfile from './screens/UserProfile/UserProfile';
 import MatchesManager from './screens/MatchesManager/MatchesManager';
+import PetManager from './screens/PetManager/PetManager';
 
 const Stack = createNativeStackNavigator();
 
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Screen name='FilterSearch' component={FilterSearch} />
         <Stack.Screen name='UserProfile' component={UserProfile} />
         <Stack.Screen name='MatchesManager' component={MatchesManager} />
+        <Stack.Screen name='PetManager' component={PetManager} />
       </Stack.Navigator>
     </NavigationContainer>
   );

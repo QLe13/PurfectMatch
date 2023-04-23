@@ -1,11 +1,11 @@
 import React, { Component, useState } from 'react';
-import { ScrollView,Text, StyleSheet, View, Button, TextInput } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, Button, TextInput } from 'react-native';
 import { Slider } from '@miblanchard/react-native-slider';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
 import { Chip } from 'react-native-paper';
 
-const petTypes = ["Cat", "Dog", "Fish", "Squirrel","Reptile", "Amphibian","Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
+const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
 interface Props {
   navigation: any;
 }
@@ -18,10 +18,10 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   function handlePressToProfile() {
     navigation.navigate('UserProfile');
   }
-  function handlePressToMatchesManager() {
-    navigation.navigate('MatchesManager');
+  function handlePressToPetManager() {
+    navigation.navigate('PetManager');
   }
-  const handleSelect = (val:string) => {
+  const handleSelect = (val: string) => {
     setselectedTypes((prev: string[]) =>
       prev.find((p) => p === val)
         ? prev.filter((cat) => cat !== val)
@@ -34,7 +34,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
       <View style={styles.header}>
         <Button title="Profile" onPress={handlePressToProfile} />
         <Text style={styles.headerText}>Purfect Match</Text>
-        <Button title="Message" onPress={handlePressToMatchesManager} />
+        <Button title="Pet Manager" onPress={handlePressToPetManager} />
       </View>
       {/* This part ^ is the header of the page, you can reapply it to any page you want */}
 
@@ -91,36 +91,36 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
               value={selectedAge.toString()}
             />
           </View>
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Price Range:</Text>
-        <View style={styles.picker}>
-        <Picker
-          selectedValue={selectedPriceRange}
-          onValueChange={(itemValue, itemIndex) => setSelectedPriceRange(itemValue)}>
-          <Picker.Item label="$0-$500" value="$0-$500" />
-          <Picker.Item label="$500-$1000" value="$500-$1000" />
-          <Picker.Item label="$1000-$2000" value="$1000-$2000" />
-          <Picker.Item label="$2000+" value="$2000+" />
-        </Picker>
         </View>
-      </View>
-      <View style={styles.inputContainer}>
-        <Text style={styles.label}>Distance:</Text>
-        <View style={styles.mileDisplay}><Text>{selectedDistance} Miles</Text></View>
-        <Slider 
-        minimumValue={20} 
-        maximumValue={100} 
-        step={10}
-        value={selectedDistance}
-        onValueChange={(value)=>setSelectedDistance(Number(value))}/>
-      </View>
-      <View>
-        <Button title="Search for purfect match!" onPress={() => (
-          console.log('search')
-          
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Price Range:</Text>
+          <View style={styles.picker}>
+            <Picker
+              selectedValue={selectedPriceRange}
+              onValueChange={(itemValue, itemIndex) => setSelectedPriceRange(itemValue)}>
+              <Picker.Item label="$0-$500" value="$0-$500" />
+              <Picker.Item label="$500-$1000" value="$500-$1000" />
+              <Picker.Item label="$1000-$2000" value="$1000-$2000" />
+              <Picker.Item label="$2000+" value="$2000+" />
+            </Picker>
+          </View>
+        </View>
+        <View style={styles.inputContainer}>
+          <Text style={styles.label}>Distance:</Text>
+          <View style={styles.mileDisplay}><Text>{selectedDistance} Miles</Text></View>
+          <Slider
+            minimumValue={20}
+            maximumValue={100}
+            step={10}
+            value={selectedDistance}
+            onValueChange={(value) => setSelectedDistance(Number(value))} />
+        </View>
+        <View>
+          <Button title="Search for purfect match!" onPress={() => (
+            console.log('search')
+
           )} />
-      </View>
+        </View>
       </ScrollView>
     </View>
   );
