@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import { Text, StyleSheet, View, Button, TextInput, SectionList } from 'react-native'
 
 interface Props {
@@ -7,9 +7,14 @@ interface Props {
 
 const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
 
+type PetList = {
+    title: string,
+    data: string[]
+}
+
 const PetManager: React.FC<Props> = ({ navigation }) => {
-    let petList: { title: string, data: string[] }[] = [{ title: "No Pets Yet", data: [] }]
-    myPets()
+    const init:PetList = { title: "No Pets Yet", data: [] }
+    const [petList, setPetList]:[PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
     // function handlePressToProfile() {
     //     navigation.navigate('UserProfile');
@@ -18,38 +23,39 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     //     navigation.navigate('PetManager');
     // }
 
-    let update = true
+    const [update, setUpdate] = useState(true)
 
     function myPets() {
-        petList = [
-            {
-                title: "Cats",
-                data: ["Socks", "Francine"]
-            }
-        ]
-        update = !update;
+        setPetList({
+            title: "Cats",
+            data: ["Socks", "Francine"]
+        })
+        setUpdate(!update)
     }
 
     function favorited() {
-        petList = [
-            {
-                title: "Dogs",
-                data: ["Frank"]
-            }
-        ]
-        update = !update
+        setPetList({
+            title: "Dogs",
+            data: ["Frank"]
+        })
+        setUpdate(!update)
     }
 
     function requests() {
-        petList = [
-            {
-                title: "Cats",
-                data: ["Asjal wants Francine!"]
-            }
-        ]
-        update = !update
+        setPetList({
+            title: "Cats",
+            data: ["Asjal wants Francine!"]
+        })
+        setUpdate(!update)
     }
-
+    //init whenever the page is loaded 
+    useEffect(() => {
+        setPetList({
+            title: "Cats",
+            data: ["Socks", "Francine"]
+        })
+        setUpdate(!update)
+    }, [])
     return (
         <View style={styles.container}>
             {/* <View style={styles.header}>
@@ -64,7 +70,7 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
             </View>
             <View style={styles.listcontainer}>
                 <SectionList
-                    sections={petList}
+                    sections={[petList]}
                     extraData={update}
                     renderItem={({ item }) => (
                         <View style={styles.petlabel}>
