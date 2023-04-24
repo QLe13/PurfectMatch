@@ -12,7 +12,7 @@ const db = [
   {image: require('./petImages/dog.jpeg'),id:3, name: 'Dog'}
 ]
 const {width, height} = Dimensions.get('window');
-const SwipingInterface = ({navigation}: Props) => {
+const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
   const [data, setData] = useState(db)
   const [activeCard, setActiveCard] = useState(data.length-1)
   const canSwipe = activeCard >= 0
