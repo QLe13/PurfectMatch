@@ -10,11 +10,11 @@ const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Rac
 type PetList = {
     title: string,
     data: string[]
-}
+}[]
 
 const PetManager: React.FC<Props> = ({ navigation }) => {
-    const init:PetList = { title: "No Pets Yet", data: [] }
-    const [petList, setPetList]:[PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
+    const init: PetList = [{ title: "No Pets Yet", data: [] }]
+    const [petList, setPetList]: [PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
     // function handlePressToProfile() {
     //     navigation.navigate('UserProfile');
@@ -26,35 +26,39 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     const [update, setUpdate] = useState(true)
 
     function myPets() {
-        setPetList({
+        setPetList([{
             title: "Cats",
-            data: ["Socks", "Francine"]
-        })
+            data: ["Slay", "Boss"]
+        },
+        {
+            title: "Dogs",
+            data: ["Socks", "Francine", "Queen", "Man"]
+        },
+        {
+            title: "Rats",
+            data: ["Ratty", "Rat Boy", "Dirt"]
+        }])
         setUpdate(!update)
     }
 
     function favorited() {
-        setPetList({
+        setPetList([{
             title: "Dogs",
             data: ["Frank"]
-        })
+        }])
         setUpdate(!update)
     }
 
     function requests() {
-        setPetList({
+        setPetList([{
             title: "Cats",
             data: ["Asjal wants Francine!"]
-        })
+        }])
         setUpdate(!update)
     }
     //init whenever the page is loaded 
     useEffect(() => {
-        setPetList({
-            title: "Cats",
-            data: ["Socks", "Francine"]
-        })
-        setUpdate(!update)
+        myPets()
     }, [])
     return (
         <View style={styles.container}>
@@ -70,7 +74,7 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
             </View>
             <View style={styles.listcontainer}>
                 <SectionList
-                    sections={[petList]}
+                    sections={petList}
                     extraData={update}
                     renderItem={({ item }) => (
                         <View style={styles.petlabel}>
@@ -95,6 +99,7 @@ const styles = StyleSheet.create({
     listcontainer: {
         padding: 10,
         flexGrow: 1,
+        paddingBottom: 80
     },
     header: {
         flexDirection: 'row',
