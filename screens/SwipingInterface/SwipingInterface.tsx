@@ -3,6 +3,7 @@ import {Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity} fro
 import TinderCard from 'react-tinder-card';
 import { useMemo, useRef, useState } from 'react';
 
+
 interface Props {
   navigation: any;
 }
