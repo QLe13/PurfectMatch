@@ -30,7 +30,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={styles.biggerContainer}>
       <View style={styles.header}>
         <Button title="Profile" onPress={handlePressToProfile} />
         <Text style={styles.headerText}>Purfect Match</Text>
@@ -127,6 +127,9 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+  biggerContainer: {
+    flex: 1,
+  },
   container: {
     flexGrow: 1,
     padding: 16,
