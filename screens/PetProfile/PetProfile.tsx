@@ -12,7 +12,7 @@ type PetList = {
     data: string[]
 }[]
 
-const PetManager: React.FC<Props> = ({ navigation }) => {
+const PetProfile: React.FC<Props> = ({ navigation }) => {
     const init: PetList = [{ title: "No Pets Yet", data: [] }]
     const [petList, setPetList]: [PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
@@ -25,62 +25,12 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
 
     const [update, setUpdate] = useState(true)
 
-    function myPets() {
-        setPetList([{
-            title: "Cats",
-            data: ["Slay", "Boss"]
-        },
-        {
-            title: "Dogs",
-            data: ["Socks", "Francine", "Queen", "Man"]
-        },
-        {
-            title: "Rats",
-            data: ["Ratty", "Rat Boy", "Dirt"]
-        }])
-        setUpdate(!update)
-    }
-
-    function favorited() {
-        setPetList([{
-            title: "Dogs",
-            data: ["Frank"]
-        }])
-        setUpdate(!update)
-    }
-
-    function requests() {
-        setPetList([{
-            title: "Cats",
-            data: ["Asjal wants Francine"]
-        }])
-        setUpdate(!update)
-    }
     //init whenever the page is loaded 
     useEffect(() => {
-        myPets()
     }, [])
     return (
         <View style={styles.container}>
-            <View style={styles.header}>
-                <Button title="My Pets" onPress={myPets}></Button>
-                <Button title="Favorited" onPress={favorited}></Button>
-                <Button title="Requests" onPress={requests}></Button>
-            </View>
-            <View style={styles.listcontainer}>
-                <SectionList
-                    sections={petList}
-                    extraData={update}
-                    renderItem={({ item }) => (
-                        <View style={styles.petlabel}>
-                            <Text style={styles.item} onPress={() => navigation.navigate('PetProfile', { petName: item })}>{item}</Text>
-                        </View>
-                    )}
-                    renderSectionHeader={({ section: { title } }) => (
-                        <Text style={styles.sectionHeader}>{title}</Text>
-                    )}
-                />
-            </View>
+            <Text>hey</Text>
         </View>
     );
 }
@@ -172,4 +122,4 @@ const styles = StyleSheet.create({
         padding: 16,
     },
 });
-export default PetManager;
+export default PetProfile;

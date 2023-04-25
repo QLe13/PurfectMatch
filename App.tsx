@@ -6,6 +6,7 @@ import FilterSearch from './screens/FilterSearch/FilterSearch';
 import UserProfile from './screens/UserProfile/UserProfile';
 import MatchesManager from './screens/MatchesManager/MatchesManager';
 import PetManager from './screens/PetManager/PetManager';
+import PetProfile from './screens/PetProfile/PetProfile';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,6 +18,7 @@ export default function App() {
         <Stack.Screen name='UserProfile' component={UserProfile} />
         <Stack.Screen name='MatchesManager' component={MatchesManager} />
         <Stack.Screen name='PetManager' component={PetManager} />
+        <Stack.Screen name='PetProfile' component={PetProfile} />
       </Stack.Navigator>
     </NavigationContainer>
   );
