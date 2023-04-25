@@ -17,7 +17,7 @@ export default function App() {
   return (
     <SafeAreaProvider style={{ paddingTop: 50 }}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='AddPet' screenOptions={{ headerShown: false }}>
+        <Stack.Navigator initialRouteName='FilterSearch' screenOptions={{ headerShown: false }}>
           <Stack.Screen name='FilterSearch' component={FilterSearch} />
           <Stack.Screen name='UserProfile' component={UserProfile} />
           <Stack.Screen name='MatchesManager' component={MatchesManager} />

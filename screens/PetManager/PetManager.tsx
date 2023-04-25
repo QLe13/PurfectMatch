@@ -16,12 +16,12 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     const init: PetList = [{ title: "No Pets Yet", data: [] }]
     const [petList, setPetList]: [PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
-    // function handlePressToProfile() {
-    //     navigation.navigate('UserProfile');
-    // }
-    // function handlePressToPetManager() {
-    //     navigation.navigate('PetManager');
-    // }
+    function handlePressToProfile() {
+        navigation.navigate('FilterSearch');
+    }
+    function handlePressToPetManager() {
+        navigation.navigate('UserProfile');
+    }
 
     const [update, setUpdate] = useState(true)
 
@@ -63,6 +63,11 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
+                <Button title="Filter Search" onPress={handlePressToProfile} />
+                <Text style={styles.headerText}>Purfect Match</Text>
+                <Button title="User Profile" onPress={handlePressToPetManager} />
+            </View>
+            <View style={styles.header}>
                 <Button title="My Pets" onPress={myPets}></Button>
                 <Button title="Favorited" onPress={favorited}></Button>
                 <Button title="Requests" onPress={requests}></Button>
@@ -103,7 +108,9 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: 'gray'
     },
     sectionHeader: {
         paddingTop: 2,
