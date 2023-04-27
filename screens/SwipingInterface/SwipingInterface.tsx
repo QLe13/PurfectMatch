@@ -37,7 +37,7 @@ const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
     navigation.navigate('UserProfile');
   }
   function handlePressToMatchesManager() {
-    navigation.navigate('MatchesManager');
+    navigation.navigate('PetManager');
   }
   const onSwipe = (direction: string) => {
     console.log('You swiped: ' + direction)
