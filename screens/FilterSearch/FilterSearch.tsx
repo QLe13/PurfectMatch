@@ -21,6 +21,10 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   function handlePressToPetManager() {
     navigation.navigate('PetManager');
   }
+  function handlePressToSwipeInterface() {
+    console.log("search")
+    navigation.navigate('SwipingInterface')
+  }
   const handleSelect = (val: string) => {
     setselectedTypes((prev: string[]) =>
       prev.find((p) => p === val)
@@ -116,10 +120,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
             onValueChange={(value) => setSelectedDistance(Number(value))} />
         </View>
         <View>
-          <Button title="Search for purfect match!" onPress={() => (
-            console.log('search')
-
-          )} />
+          <Button title="Search for purfect match!" onPress={handlePressToSwipeInterface}          />
         </View>
       </ScrollView>
     </View>
