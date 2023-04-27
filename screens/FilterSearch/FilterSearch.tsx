@@ -2,7 +2,6 @@ import React, { Component, useState } from 'react';
 import { ScrollView, Text, StyleSheet, View, Button, TextInput } from 'react-native';
 import { Slider } from '@miblanchard/react-native-slider';
 import { Picker } from '@react-native-picker/picker';
-import { useNavigation } from '@react-navigation/native';
 import { Chip } from 'react-native-paper';
 
 const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]

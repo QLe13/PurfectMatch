@@ -1,8 +1,8 @@
 import React, {Component,useState, ChangeEvent, useEffect} from "react";
-import {ScrollView,Text,StyleSheet,View,Button,TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform} from "react-native";
+import {ScrollView,Text,StyleSheet,View,Button,TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, TouchableOpacity} from "react-native";
 import Avatar from "./Avatar/Avatar";
 import { Picker } from "@react-native-picker/picker";
-
+import ShowMap from "../ShowMap/ShowMap";
 
 
 
@@ -17,6 +17,7 @@ const initPetForm: Pet = {
     price: 0,
     location: [0,0],
 }
+const {width, height} = Dimensions.get('window')
 
 const petTypes = ["Cat", "Dog", "Fish", "Squirrel","Reptile", "Amphibian","Racoon", "Hamster", "Rabbit", "Spider", "Insect", "Pig"]
 
@@ -26,7 +27,10 @@ const AddPet: React.FC<Props> = ({navigation}) => {
     const [age, setAge] = useState<number>(0)
     const [type, setType] = useState<string>('')
     const [price, setPrice] = useState<number>(0)
-
+    const [location, setLocation] = useState<Coordinate>([0,0])
+    const [showMap, setShowMap] = useState<boolean>(false)
+    const initCoordinates: Coordinate = [0,0]
+   
     const handleNameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setPetForm({...petForm, name: event.nativeEvent.text})
         setName(event.nativeEvent.text)
@@ -35,7 +39,11 @@ const AddPet: React.FC<Props> = ({navigation}) => {
         setPetForm({...petForm, age: parseInt(event.nativeEvent.text)||0})
         setAge(parseInt(event.nativeEvent.text)||0)
     }
+    function isPetType(type: string): type is Pet['type'] {
+        return ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect", "Pig", ''].includes(type);
+      }
     const handleTypeChange = (t:string) => {
+        if(!isPetType(t)) return
         setPetForm({...petForm, type: t})
         setType(t)
     }
@@ -47,19 +55,23 @@ const AddPet: React.FC<Props> = ({navigation}) => {
 
     const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
         setPetForm({...petForm, location: [0,0]})
+        setLocation([0,0])
     }
 
-
+    useEffect(() => {
+        console.log(JSON.stringify(location)==="[0,0]")
+        console.log(JSON.stringify(location))
+    }, [location])
 
 
     return (
-    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
+    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50}>
         <View style={styles.header}>
-            <Button title="Add Pet" onPress={()=>{}} />
+            <Button title="X" onPress={()=>navigation.navigate('PetManager')} />
             <Text style={styles.headerText}>Purfect Match</Text>
-            <Button title="Find Pet" onPress={()=>{}} />
+            <Button title="Add" onPress={()=>{}} />
         </View>
-        <ScrollView>
+        <ScrollView style= {{height:'100%'}} >
             <View style={styles.container}>
                 <Avatar />
                 <View style={styles.nameContainer}>
@@ -75,7 +87,7 @@ const AddPet: React.FC<Props> = ({navigation}) => {
                         numberOfLines={1}
                         itemStyle={{ height: 50, opacity: 1}}> 
                             {petTypes.map((petType) => {
-                                return <Picker.Item label={petType} value={petType}/>
+                                return <Picker.Item key={petType} label={petType} value={petType}/>
                             })}
                         </Picker>
                     </View>
@@ -101,6 +113,18 @@ const AddPet: React.FC<Props> = ({navigation}) => {
                         placeholder="Price:"
                     />
                 </View>
+                <View style={styles.locationContainer}>
+                    <Text style={styles.locationText}>Location:</Text>
+                    <TouchableOpacity style={styles.locationInput} onPress={()=>{
+                        setShowMap(!showMap)
+                    }}>
+                        <Text>{JSON.stringify(location)!=="[0,0]"?`${location[0].toFixed(2)},${location[1].toFixed(2)}`:"Set Location..."}</Text>
+                    </TouchableOpacity>
+                </View>
+                {showMap && 
+                <View style={styles.mapContainer}>
+                    <ShowMap setLocation={setLocation} setShowMap={setShowMap}/>
+                </View>}  
             </View>
         </ScrollView>
     </KeyboardAvoidingView>
@@ -123,7 +147,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
       },
     container: {
-        display: 'flex',
+        flex: 1,
         flexDirection: 'column',
         justifyContent:'center',
         alignItems:'center',
@@ -131,7 +155,7 @@ const styles = StyleSheet.create({
     nameContainer: {
         fontWeight: 'bold',
         display: 'flex',
-        marginTop: 10,
+        marginTop: 15,
     },
     nameInput: {
         fontSize: 20,
@@ -146,7 +170,7 @@ const styles = StyleSheet.create({
     typeContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 15,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -155,7 +179,7 @@ const styles = StyleSheet.create({
     ageContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 15,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -173,7 +197,7 @@ const styles = StyleSheet.create({
     priceContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 15,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -190,6 +214,46 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         backgroundColor: '#fff',
     },
+    locationContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 15,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 50,
+        width: '90%',
+    },
+    locationText: {
+        fontSize: 20,
+    },
+    locationInput: {
+        fontSize: 20,
+        width: '74%',
+        height: 50,
+        textAlign: 'center',
+        borderRadius: 7,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    mapContainer: {
+        width: '80%',
+        height: height*0.7,//change this later when you have an active button inside the popup
+        position: 'absolute',
+        top: '5%',
+        left: '10%',
+        zIndex: 10000,
+        backgroundColor: '#fff',
+        borderRadius: 7,
+        display: 'flex',
+        flexDirection: 'column',
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: .25,
+    }
 });
 
 
