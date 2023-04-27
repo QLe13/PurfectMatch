@@ -1,5 +1,5 @@
 import React, { Component, useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Button, TextInput, SectionList } from 'react-native'
+import { Text, StyleSheet, View, Button, TextInput, SectionList, Image, TouchableOpacity } from 'react-native'
 
 interface Props {
     navigation: any;
@@ -16,10 +16,10 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     const init: PetList = [{ title: "No Pets Yet", data: [] }]
     const [petList, setPetList]: [PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
-    function handlePressToProfile() {
+    function handlePressToFilterSearch() {
         navigation.navigate('FilterSearch');
     }
-    function handlePressToPetManager() {
+    function handlePressToUserProfile() {
         navigation.navigate('UserProfile');
     }
 
@@ -63,10 +63,23 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Button title="Filter Search" onPress={handlePressToProfile} />
-                <Text style={styles.headerText}>Purfect Match</Text>
-                <Button title="User Profile" onPress={handlePressToPetManager} />
-            </View>
+            <TouchableOpacity onPress = {handlePressToFilterSearch}>
+                <Image 
+                    source={require('../.././assets/searchicon.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
+            <Image 
+                source={require('../.././assets/icon.png')}
+                style={{width: 50, height: 50, alignContent: 'center'}}
+            ></Image>
+            <TouchableOpacity onPress = {handlePressToUserProfile}>
+                <Image 
+                    source={require('../.././assets/userprofileicon.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
+        </View>
             <View style={styles.header}>
                 <Button title="My Pets" onPress={myPets}></Button>
                 <Button title="Favorited" onPress={favorited}></Button>

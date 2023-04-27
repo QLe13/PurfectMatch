@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity} from 'react-native';
+import {Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity}   from 'react-native';
 import TinderCard from 'react-tinder-card';
 import { useMemo, useRef, useState } from 'react';
 
@@ -51,9 +51,22 @@ const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Button title="Profile" onPress={handlePressToProfile} />
-        <Text style={styles.headerText}>Purfect Match</Text>
-        <Button title="Message" onPress={handlePressToMatchesManager} />
+        <TouchableOpacity onPress={handlePressToProfile}>  
+          <Image 
+            source={require('../.././assets/userprofileicon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
+        <Image 
+          source={require('../.././assets/icon.png')}
+          style={{width: 50, height: 50, alignContent: 'center'}}
+        ></Image>
+        <TouchableOpacity onPress={handlePressToMatchesManager}>
+          <Image 
+            source={require('../.././assets/14558.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
       </View>
         {data.map((item, index) => 
           (<TinderCard 
