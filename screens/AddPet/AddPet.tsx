@@ -1,5 +1,5 @@
 import React, {Component,useState, ChangeEvent, useEffect} from "react";
-import {ScrollView,Text,StyleSheet,View,Button,TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform} from "react-native";
+import {Image, ScrollView,Text,StyleSheet,View,Button,TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform, TouchableOpacity} from "react-native";
 import Avatar from "./Avatar/Avatar";
 import { Picker } from "@react-native-picker/picker";
 
@@ -50,14 +50,33 @@ const AddPet: React.FC<Props> = ({navigation}) => {
     }
 
 
+    function handlePressToProfile() {
+        navigation.navigate('UserProfile')
+    }
 
+    function handlePressToPetManager() {
+        navigation.navigate('PetManager')
+    }
 
     return (
     <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
         <View style={styles.header}>
-            <Button title="Add Pet" onPress={()=>{}} />
-            <Text style={styles.headerText}>Purfect Match</Text>
-            <Button title="Find Pet" onPress={()=>{}} />
+            <TouchableOpacity onPress = {handlePressToProfile}>
+                <Image 
+                    source={require('../.././assets/cancel.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
+            <Image 
+                source={require('../.././assets/icon.png')}
+                style={{width: 50, height: 50, alignContent: 'center'}}
+            ></Image>
+            <TouchableOpacity onPress = {handlePressToPetManager}>
+                <Image 
+                    source={require('../.././assets/greencheck.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
         </View>
         <ScrollView>
             <View style={styles.container}>

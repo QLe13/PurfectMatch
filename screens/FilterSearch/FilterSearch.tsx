@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { ScrollView, Text, StyleSheet, View, Button, TextInput } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, Button, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Slider } from '@miblanchard/react-native-slider';
 import { Picker } from '@react-native-picker/picker';
 import { useNavigation } from '@react-navigation/native';
@@ -33,12 +33,26 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
     );
   };
 
+
   return (
     <View style={styles.biggerContainer}>
       <View style={styles.header}>
-        <Button title="Profile" onPress={handlePressToProfile} />
-        <Text style={styles.headerText}>Purfect Match</Text>
-        <Button title="Pet Manager" onPress={handlePressToPetManager} />
+        <TouchableOpacity onPress = {handlePressToProfile}>
+          <Image 
+            source={require('../.././assets/userprofileicon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
+        <Image 
+          source={require('../.././assets/icon.png')}
+          style={{width: 50, height: 50, alignContent: 'center'}}
+        ></Image>
+        <TouchableOpacity onPress = {handlePressToPetManager}>  
+          <Image 
+            source={require('../.././assets/catfaceicon.jpg')}
+            style={{width: 60, height: 60, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
       </View>
       {/* This part ^ is the header of the page, you can reapply it to any page you want */}
 
