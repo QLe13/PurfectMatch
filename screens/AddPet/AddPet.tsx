@@ -74,7 +74,7 @@ const AddPet: React.FC<Props> = ({navigation}) => {
     }
 
     return (
-    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50}>
+    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50} style={{flex:1}}>
         <View style={styles.header}>
             <TouchableOpacity onPress = {handlePressToProfile}>
                 <Image 
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     nameContainer: {
         fontWeight: 'bold',
         display: 'flex',
-        marginTop: 15,
+        marginTop: 20,
     },
     nameInput: {
         fontSize: 20,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     typeContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     ageContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     priceContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     locationContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
