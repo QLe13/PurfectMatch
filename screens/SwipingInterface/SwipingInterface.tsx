@@ -11,7 +11,9 @@ interface Props {
 const db = [
   { image: require('./petImages/redPanda.png'), id: 1, name: 'Red Panda', age: 5, type: "Rodent", price: 9000, location: [0, 0] },
   { image: require('./petImages/cat.jpeg'), id: 2, name: 'Cat', age: 10, type: "Cat", price: 690, location: [0, 0] },
-  { image: require('./petImages/dog.jpeg'), id: 3, name: 'Dog', age: 1, type: "Dog", price: 120, location: [0, 0] }
+  { image: require('./petImages/dog.jpeg'), id: 3, name: 'Dog', age: 1, type: "Dog", price: 120, location: [0, 0] },
+  { image: require('./petImages/rabbit.jpeg'), id: 4, name: 'Bunny', age: 2, type: "Rabbit", price: 200000, location: [0, 0] },
+  { image: require('./petImages/racoon.jpeg'), id: 5, name: 'Racoon', age: 3, type: "Racoon", price: 100000, location: [0, 0] },
 ]
 const { width, height } = Dimensions.get('window');
 const SwipingInterface: React.FC<Props> = ({ navigation, route }: Props) => {
