@@ -36,26 +36,26 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.biggerContainer}>
       <View style={styles.header}>
-        <TouchableOpacity onPress = {handlePressToProfile}>
-          <Image 
-            source={require('../.././assets/userprofileicon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+        <TouchableOpacity onPress={handlePressToProfile}>
+          <Image
+            source={require('../.././assets/profileicon.webp')}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
-        <Image 
+        <Image
           source={require('../.././assets/icon.png')}
-          style={{width: 50, height: 50, alignContent: 'center'}}
+          style={{ width: 50, height: 50, alignContent: 'center' }}
         ></Image>
-        <TouchableOpacity onPress = {handlePressToPetManager}>  
-          <Image 
-            source={require('../.././assets/catfaceicon.jpg')}
-            style={{width: 60, height: 60, alignContent: 'center'}}
+        <TouchableOpacity onPress={handlePressToPetManager}>
+          <Image
+            source={require('../.././assets/caticon2.jpg')}
+            style={{ width: 50, height: 70, alignContent: 'center', marginTop: 10 }}
           ></Image>
         </TouchableOpacity>
       </View>
       {/* This part ^ is the header of the page, you can reapply it to any page you want */}
 
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Pet Preferences:</Text>
           <View style={styles.filterContainer}>
@@ -133,7 +133,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
             onValueChange={(value) => setSelectedDistance(Number(value))} />
         </View>
         <View>
-          <Button title="Search for purfect match!" onPress={handlePressToSwipeInterface}          />
+          <Button title="Search for purfect match!" onPress={handlePressToSwipeInterface} />
         </View>
       </ScrollView>
     </View>
@@ -145,8 +145,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   container: {
-    flexGrow: 1,
-    padding: 16,
+    flexGrow: 1
+  },
+  content: {
+    padding: 16
   },
   header: {
     flexDirection: 'row',
