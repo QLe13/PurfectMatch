@@ -74,11 +74,18 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
     function handlePressToPetManager() {
         navigation.navigate('PetManager')
         //Package up user input to send to pet manager
+        handleAddPet()
+        
     }
 
     function handlePressToSwipeInterface() {
         navigation.navigate('SwipingInterface')
     }
+
+    const handleAddPet = () =>{
+        console.log(petForm)
+    }
+
 
     return (
 

@@ -1,5 +1,5 @@
 import React, { Component, useState, ChangeEvent, useEffect } from "react";
-import { ScrollView, Text, StyleSheet, View, Button, TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from "react-native";
+import { Image, TouchableOpacity, ScrollView, Text, StyleSheet, View, Button, TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from "react-native";
 import Avatar from "../AddPet/Avatar/Avatar";
 
 interface Props {
@@ -48,15 +48,31 @@ const PetProfile: React.FC<Props> = ({ navigation, route }) => {
         setPetForm({ ...petForm, location: [0, 0] })
     }
 
+    function handlePressToPetManager(){
+        navigation.navigate('PetManager')
+    }
+
+    function handlePressToSwipeInterface() {
+        navigation.navigate('SwipingInterface')
+    }
 
 
 
     return (
         <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
             <View style={styles.header}>
-                <Button title="Add Pet" onPress={() => { }} />
-                <Text style={styles.headerText}>Purfect Match</Text>
-                <Button title="Find Pet" onPress={() => { }} />
+            <TouchableOpacity onPress={handlePressToPetManager}>
+                 <Image
+                        source={require('../.././assets/caticon2.jpg')}
+                        style={{ width: 50, height: 50, alignContent: 'center' }}
+                    ></Image>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handlePressToSwipeInterface}>
+                    <Image
+                        source={require('../.././assets/icon.png')}
+                        style={{ width: 55, height: 50, alignContent: 'center' }}
+                    ></Image>
+                </TouchableOpacity>
             </View>
             <ScrollView style={{ height: "100%" }}>
                 <View style={styles.container}>
