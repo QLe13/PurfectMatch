@@ -22,6 +22,9 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     function handlePressToUserProfile() {
         navigation.navigate('UserProfile');
     }
+    function handlePressToSwipeInterface() {
+        navigation.navigate('SwipingInterface');
+    }
 
     const [update, setUpdate] = useState(true)
 
@@ -69,13 +72,15 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
                     style={{width: 50, height: 50, alignContent: 'center'}}
                 ></Image>
             </TouchableOpacity>
-            <Image 
-                source={require('../.././assets/icon.png')}
-                style={{width: 50, height: 50, alignContent: 'center'}}
-            ></Image>
+            <TouchableOpacity onPress = {handlePressToSwipeInterface}>
+                <Image 
+                    source={require('../.././assets/icon.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
             <TouchableOpacity onPress = {handlePressToUserProfile}>
                 <Image 
-                    source={require('../.././assets/userprofileicon.png')}
+                    source={require('../.././assets/profileicon.webp')}
                     style={{width: 50, height: 50, alignContent: 'center'}}
                 ></Image>
             </TouchableOpacity>

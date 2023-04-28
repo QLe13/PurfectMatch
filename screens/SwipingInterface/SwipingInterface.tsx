@@ -39,6 +39,9 @@ const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
   function handlePressToMatchesManager() {
     navigation.navigate('MatchesManager');
   }
+  function handlePressToSwipeInterface() {
+    navigation.navigate('SwipingInterface')
+  }
   const onSwipe = (direction: string) => {
     console.log('You swiped: ' + direction)
     setActiveCard(activeCard - 1)
@@ -53,14 +56,16 @@ const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
       <View style={styles.header}>
         <TouchableOpacity onPress={handlePressToProfile}>  
           <Image 
-            source={require('../.././assets/userprofileicon.png')}
+            source={require('../.././assets/profileicon.webp')}
             style={{width: 50, height: 50, alignContent: 'center'}}
           ></Image>
         </TouchableOpacity>
-        <Image 
-          source={require('../.././assets/icon.png')}
-          style={{width: 50, height: 50, alignContent: 'center'}}
-        ></Image>
+        <TouchableOpacity onPress = {handlePressToSwipeInterface}>
+          <Image 
+            source={require('../.././assets/icon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToMatchesManager}>
           <Image 
             source={require('../.././assets/14558.png')}
