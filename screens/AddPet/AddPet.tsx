@@ -70,33 +70,21 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
         navigation.navigate('UserProfile')
     }
 
-
-    function handlePressToPetManager() {
-        navigation.navigate('PetManager')
-        //Package up user input to send to pet manager
-    }
-
-    function handlePressToSwipeInterface() {
-        navigation.navigate('SwipingInterface')
-    }
-
     return (
 
         <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50} style={{ flex: 1 }}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={handlePressToProfile}>
-                 <Image
+                    <Image
                         source={require('../.././assets/cancel.png')}
                         style={{ width: 50, height: 50, alignContent: 'center' }}
                     ></Image>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressToSwipeInterface}>
-                    <Image
-                        source={require('../.././assets/icon.png')}
-                        style={{ width: 55, height: 50, alignContent: 'center' }}
-                    ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressToPetManager}>
+                <Image
+                    source={require('../.././assets/icon.png')}
+                    style={{ width: 55, height: 50, alignContent: 'center' }}
+                ></Image>
+                <TouchableOpacity onPress={handlePressToProfile}>
                     <Image
                         source={require('../.././assets/greencheck.png')}
                         style={{ width: 50, height: 50, alignContent: 'center' }}
