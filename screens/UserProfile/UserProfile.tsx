@@ -8,16 +8,16 @@ interface Props {
 }
 
 const UserProfile: React.FC<Props> = ({ navigation }) => {
-  const defaultUserName:string = "John Doe"
+  const defaultUserName: string = "John Doe"
   const [userName, setUserName] = useState<string>(defaultUserName);
-  const defaultLocation:string = "San Francisco, CA"
+  const defaultLocation: string = "San Francisco, CA"
   const [location, setLocation] = useState<string>(defaultLocation);
   const [isEditingLocation, setIsEditingLocation] = useState<boolean>(false);
-  const defaultEmail:string = "hehe@gmail.com"
+  const defaultEmail: string = "hehe@gmail.com"
   const [email, setEmail] = useState<string>(defaultEmail);
-  const defaultPhoneNumber:string = "123-456-7890"
+  const defaultPhoneNumber: string = "123-456-7890"
   const [phoneNumber, setPhoneNumber] = useState<string>(defaultPhoneNumber);
-  const defaultBio:string = "I love animals!"
+  const defaultBio: string = "I love animals!"
   const [bio, setBio] = useState<string>(defaultBio);
 
   const handleEditLocation = () => {
@@ -35,7 +35,7 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
   function handlePressToSwipeInterface() {
     navigation.navigate('SwipingInterface')
   }
-  
+
   function handlePressToSearchPet() {
     navigation.navigate('FilterSearch')
   }
@@ -44,26 +44,26 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
     <View>
       <View style={styles.header}>
         <TouchableOpacity onPress={handlePressToAddPet}>
-          <Image 
+          <Image
             source={require('../.././assets/plusicon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToSwipeInterface}></TouchableOpacity>
-          <Image 
-            source={require('../.././assets/icon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
-          ></Image>
+        <Image
+          source={require('../.././assets/icon.png')}
+          style={{ width: 55, height: 50, alignContent: 'center' }}
+        ></Image>
         <TouchableOpacity onPress={handlePressToSearchPet}>
-          <Image 
+          <Image
             source={require('../.././assets/searchicon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
-        </View>
+      </View>
       <View style={styles.container}>
         <View style={styles.userNameView}>
-            <Text style={styles.userNameText}>{userName}</Text>
+          <Text style={styles.userNameText}>{userName}</Text>
         </View>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Location:</Text>
@@ -73,7 +73,7 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
                 <TextInput
                   style={styles.locationInput}
                   value={location}
-                  onChangeText={setLocation}/>
+                  onChangeText={setLocation} />
               </>
             ) : (
               <>
@@ -90,11 +90,11 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
                 <TextInput
                   style={styles.locationInput}
                   value={email}
-                  onChangeText={setEmail}/>
+                  onChangeText={setEmail} />
                 <TextInput
                   style={styles.locationInput}
                   value={phoneNumber}
-                  onChangeText={setPhoneNumber}/>
+                  onChangeText={setPhoneNumber} />
               </>
             ) : (
               <>
@@ -104,7 +104,7 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
             )}
           </View>
         </View>
-        
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Bio:</Text>
           <View style={styles.locationInputContainer}>
@@ -113,18 +113,18 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
                 <TextInput
                   style={styles.locationInput}
                   value={bio}
-                  onChangeText={setBio}/>
-              </>):(
+                  onChangeText={setBio} />
+              </>) : (
               <>
                 <Text style={styles.locationInputInactive}>{bio}</Text>
               </>)}
           </View>
         </View>
         <View style={styles.editButton}>
-              {isEditingLocation ? (
-                <Button title="Save" onPress={handleSaveLocation} />
-              ):(
-                <Button title="Edit Profile" onPress={handleEditLocation}/>)}
+          {isEditingLocation ? (
+            <Button title="Save" onPress={handleSaveLocation} />
+          ) : (
+            <Button title="Edit Profile" onPress={handleEditLocation} />)}
         </View>
       </View>
     </View>

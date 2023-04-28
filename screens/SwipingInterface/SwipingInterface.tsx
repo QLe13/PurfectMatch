@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity}   from 'react-native';
+import { Button, StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import TinderCard from 'react-tinder-card';
 import { useMemo, useRef, useState } from 'react';
 
@@ -8,14 +8,14 @@ interface Props {
   navigation: any;
 }
 const db = [
-  {image: require('./petImages/redPanda.png'),id:1, name: 'Red Panda'},
-  {image: require('./petImages/cat.jpeg'),id:2, name: 'Cat'},
-  {image: require('./petImages/dog.jpeg'),id:3, name: 'Dog'}
+  { image: require('./petImages/redPanda.png'), id: 1, name: 'Red Panda' },
+  { image: require('./petImages/cat.jpeg'), id: 2, name: 'Cat' },
+  { image: require('./petImages/dog.jpeg'), id: 3, name: 'Dog' }
 ]
-const {width, height} = Dimensions.get('window');
-const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
+const { width, height } = Dimensions.get('window');
+const SwipingInterface: React.FC<Props> = ({ navigation }: Props) => {
   const [data, setData] = useState(db)
-  const [activeCard, setActiveCard] = useState(data.length-1)
+  const [activeCard, setActiveCard] = useState(data.length - 1)
   const canSwipe = activeCard >= 0
 
   const childRefs = useMemo(
@@ -32,7 +32,7 @@ const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
     }
   }
 
-  
+
   function handlePressToProfile() {
     navigation.navigate('UserProfile');
   }
@@ -46,89 +46,89 @@ const SwipingInterface:React.FC<Props> = ({navigation}: Props) => {
     console.log('You swiped: ' + direction)
     setActiveCard(activeCard - 1)
   }
-  
-  const onCardLeftScreen = (myIdentifier:any) => {
+
+  const onCardLeftScreen = (myIdentifier: any) => {
     console.log(myIdentifier + ' left the screen')
   }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={handlePressToProfile}>  
-          <Image 
+        <TouchableOpacity onPress={handlePressToProfile}>
+          <Image
             source={require('../.././assets/profileicon.webp')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
-        <TouchableOpacity onPress = {handlePressToSwipeInterface}>
-          <Image 
+        <TouchableOpacity onPress={handlePressToSwipeInterface}>
+          <Image
             source={require('../.././assets/icon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 55, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToMatchesManager}>
-          <Image 
+          <Image
             source={require('../.././assets/14558.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
       </View>
-        {data.map((item, index) => 
-          (<TinderCard 
-          key={item.id} //right now it just the number of the image order
-          ref={childRefs[index]}
-          onSwipe={onSwipe} 
-          onCardLeftScreen={() => onCardLeftScreen('fooBar')} 
-          preventSwipe={['up', 'down']}>
-          <Image style={
-            {
-              width: width-20,
-              height: height-300,
-              position: 'absolute',
-              justifyContent: 'center',
-              alignItems: 'center',
-              alignSelf: 'center',
-              borderRadius: 20,
-              top: 20,
-              zIndex: index
-            }
-          } source={item.image}></Image>
-          <Text style={styles.animalName}>{item.name}</Text>
-        </TinderCard>)
-        )}
+      {data.map((item, index) =>
+      (<TinderCard
+        key={item.id} //right now it just the number of the image order
+        ref={childRefs[index]}
+        onSwipe={onSwipe}
+        onCardLeftScreen={() => onCardLeftScreen('fooBar')}
+        preventSwipe={['up', 'down']}>
+        <Image style={
+          {
+            width: width - 20,
+            height: height - 300,
+            position: 'absolute',
+            justifyContent: 'center',
+            alignItems: 'center',
+            alignSelf: 'center',
+            borderRadius: 20,
+            top: 20,
+            zIndex: index
+          }
+        } source={item.image}></Image>
+        <Text style={styles.animalName}>{item.name}</Text>
+      </TinderCard>)
+      )}
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-            style={{
-              width: 60,
-              height: 60,
-              backgroundColor: '#fff',
-              elevation: 5,
-              borderRadius: 30,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onPress={() => swipe('left')}>
-            <Image
-              source={require('./buttonImages/cancel.png')}
-              style={{width: 34, height: 34}}/>
+          style={{
+            width: 60,
+            height: 60,
+            backgroundColor: '#fff',
+            elevation: 5,
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => swipe('left')}>
+          <Image
+            source={require('./buttonImages/cancel.png')}
+            style={{ width: 34, height: 34 }} />
         </TouchableOpacity>
         <TouchableOpacity
-            style={{
-              width: 60,
-              height: 60,
-              backgroundColor: '#fff',
-              elevation: 5,
-              borderRadius: 30,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-            onPress={()=> swipe('right')}>
-            <Image
-              source={require('./buttonImages/heart.png')}
-              style={{width: 34, height: 34}}
-            />
+          style={{
+            width: 60,
+            height: 60,
+            backgroundColor: '#fff',
+            elevation: 5,
+            borderRadius: 30,
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+          onPress={() => swipe('right')}>
+          <Image
+            source={require('./buttonImages/heart.png')}
+            style={{ width: 34, height: 34 }}
+          />
         </TouchableOpacity>
-       </View>
+      </View>
     </View>
   );
 };
@@ -152,9 +152,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  imageSize : {
+  imageSize: {
     width: width,
-    height: height*0.8,
+    height: height * 0.8,
   },
   cardsContainer: {
     flex: 1,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 100,
     position: 'relative',
-    top: height-275,
+    top: height - 275,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
@@ -177,7 +177,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#fff',
     position: 'absolute',
-    top: height-400,
+    top: height - 400,
     zIndex: 100,
     left: 20,
   }
