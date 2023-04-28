@@ -43,7 +43,7 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
         setAge(parseInt(event.nativeEvent.text) || 0)
     }
     function isPetType(type: string): type is Pet['type'] {
-        return ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect", "Pig", ''].includes(type);
+        return ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Rodent", "Rabbit", "Spider", "Insect", "Pig", ''].includes(type);
     }
     const handleTypeChange = (t: string) => {
         if (!isPetType(t)) return
@@ -80,44 +80,32 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
     }
 
     return (
-    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50} style={{flex:1}}>
-        <View style={styles.header}>
-            <TouchableOpacity onPress = {handlePressToProfile}>
-                <Image 
-                    source={require('../.././assets/cancel.png')}
-                    style={{width: 50, height: 50, alignContent: 'center'}}
-                ></Image>
-            </TouchableOpacity>
-            <Image 
-                source={require('../.././assets/icon.png')}
-                style={{width: 50, height: 50, alignContent: 'center'}}
-            ></Image>
-            <TouchableOpacity onPress = {handlePressToPetManager}>
-                <Image 
-                    source={require('../.././assets/greencheck.png')}
-                    style={{width: 50, height: 50, alignContent: 'center'}}
-                ></Image>
-            </TouchableOpacity>
-        </View>
-        <ScrollView style= {{height:'100%'}} >
-            <View style={styles.container}>
-                <Avatar />
-                <View style={styles.nameContainer}>
-                    <TextInput style={styles.nameInput} value={name} onChange={handleNameChange} placeholder="Name:"/>
-                </View>
-                <View style={styles.typeContainer}>
-                    <View style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
-                        <Text style={{fontSize: 20}}>Type:</Text>
-                    </View>
-                    <View style={styles.picker}>
-                        <Picker selectedValue={type}
-                        onValueChange={(itemValue,index) => handleTypeChange(itemValue)}
-                        numberOfLines={1}
-                        itemStyle={{ height: 50, opacity: 1}}> 
-                            {petTypes.map((petType) => {
-                                return <Picker.Item key={petType} label={petType} value={petType}/>
-                            })}
-                        </Picker>
+        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50}>
+            <View style={styles.header}>
+                <TouchableOpacity onPress={handlePressToProfile}>
+                    <Image
+                        source={require('../.././assets/cancel.png')}
+                        style={{ width: 50, height: 50, alignContent: 'center' }}
+                    ></Image>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handlePressToSwipeInterface}>
+                    <Image
+                        source={require('../.././assets/icon.png')}
+                        style={{ width: 55, height: 50, alignContent: 'center' }}
+                    ></Image>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handlePressToPetManager}>
+                    <Image
+                        source={require('../.././assets/greencheck.png')}
+                        style={{ width: 50, height: 50, alignContent: 'center' }}
+                    ></Image>
+                </TouchableOpacity>
+            </View>
+            <ScrollView style={{ height: '100%' }} >
+                <View style={styles.container}>
+                    <Avatar />
+                    <View style={styles.nameContainer}>
+                        <TextInput style={styles.nameInput} value={name} onChange={handleNameChange} placeholder="Name:" />
                     </View>
                     <View style={styles.typeContainer}>
                         <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -133,23 +121,27 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
                                 })}
                             </Picker>
                         </View>
-                        <View style={styles.ageContainer}>
-                            <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                                <Text style={{ fontSize: 20 }}>Age:</Text>
-                            </View>
+                        <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <Text>^</Text>
+                            <Text style={{ transform: [{ rotateX: '180deg' }] }}>^</Text>
+                        </View>
+                    </View>
+                    <View style={styles.ageContainer}>
+                        <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <Text style={{ fontSize: 20 }}>Age:</Text>
+                        </View>
 
-                            <TextInput style={styles.ageInput} value={age.toString()} onChange={handleAgeChange} keyboardType="numeric" />
-                        </View>
-                        <View style={styles.priceContainer}>
-                            <Text style={styles.priceText}>$$$:</Text>
-                            <TextInput
-                                style={styles.priceInput}
-                                value={price.toString()}
-                                onChange={handlePriceChange}
-                                keyboardType="numeric"
-                                placeholder="Price:"
-                            />
-                        </View>
+                        <TextInput style={styles.ageInput} value={age.toString()} onChange={handleAgeChange} keyboardType="numeric" />
+                    </View>
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.priceText}>$$$:</Text>
+                        <TextInput
+                            style={styles.priceInput}
+                            value={price.toString()}
+                            onChange={handlePriceChange}
+                            keyboardType="numeric"
+                            placeholder="Price:"
+                        />
                     </View>
                     <View style={styles.locationContainer}>
                         <Text style={styles.locationText}>Location:</Text>
@@ -164,9 +156,8 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
                             <ShowMap setLocation={setLocation} setShowMap={setShowMap} />
                         </View>}
                 </View>
-            </View>
             </ScrollView>
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingView >
     );
 };
 

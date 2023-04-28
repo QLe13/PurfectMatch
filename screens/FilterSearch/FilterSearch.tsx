@@ -44,7 +44,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
         </TouchableOpacity>
         <Image
           source={require('../.././assets/icon.png')}
-          style={{ width: 50, height: 50, alignContent: 'center' }}
+          style={{ width: 55, height: 50, alignContent: 'center' }}
         ></Image>
         <TouchableOpacity onPress={handlePressToPetManager}>
           <Image

@@ -186,7 +186,7 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
                 <TouchableOpacity onPress={handlePressToSwipeInterface}>
                     <Image
                         source={require('../.././assets/icon.png')}
-                        style={{ width: 50, height: 50, alignContent: 'center' }}
+                        style={{ width: 55, height: 50, alignContent: 'center' }}
                     ></Image>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={handlePressToUserProfile}>
