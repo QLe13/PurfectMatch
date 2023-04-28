@@ -131,7 +131,6 @@ const styles = StyleSheet.create({
   container: {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#fff',
   },
   header: {
     flexDirection: 'row',
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 100,
-    backgroundColor: '#fff',
   },
   buttonContainer: {
     width: '100%',

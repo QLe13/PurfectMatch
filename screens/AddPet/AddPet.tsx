@@ -31,7 +31,6 @@ const AddPet: React.FC<Props> = ({navigation}) => {
     const [price, setPrice] = useState<number>(0)
     const [location, setLocation] = useState<Coordinate>([0,0])
     const [showMap, setShowMap] = useState<boolean>(false)
-    const initCoordinates: Coordinate = [0,0]
    
     const handleNameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setPetForm({...petForm, name: event.nativeEvent.text})
@@ -207,7 +206,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         height: 50,
         width: '90%',
-
     },
     ageInput: {
         fontSize: 20,
