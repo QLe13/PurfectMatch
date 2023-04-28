@@ -36,20 +36,20 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.biggerContainer}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={handlePressToProfile}>
-          <Image
+        <TouchableOpacity onPress = {handlePressToProfile}>
+          <Image 
             source={require('../.././assets/profileicon.webp')}
-            style={{ width: 50, height: 50, alignContent: 'center' }}
+            style={{width: 50, height: 50, alignContent: 'center'}}
           ></Image>
         </TouchableOpacity>
         <Image
           source={require('../.././assets/icon.png')}
           style={{ width: 55, height: 50, alignContent: 'center' }}
         ></Image>
-        <TouchableOpacity onPress={handlePressToPetManager}>
-          <Image
+        <TouchableOpacity onPress = {handlePressToPetManager}>  
+          <Image 
             source={require('../.././assets/caticon2.jpg')}
-            style={{ width: 50, height: 70, alignContent: 'center', marginTop: 10 }}
+            style={{width: 50, height: 70, alignContent: 'center', marginTop: 10}}
           ></Image>
         </TouchableOpacity>
       </View>
