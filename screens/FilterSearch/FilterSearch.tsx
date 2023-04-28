@@ -30,7 +30,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.header}>
         <Button title="Profile" onPress={handlePressToProfile} />
         <Text style={styles.headerText}>Purfect Match</Text>
@@ -38,7 +38,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
       </View>
       {/* This part ^ is the header of the page, you can reapply it to any page you want */}
 
-      <ScrollView contentContainerStyle={styles.container}>
+      <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Pet Preferences:</Text>
           <View style={styles.filterContainer}>
@@ -128,8 +128,10 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: 16,
+    flexGrow: 1
+  },
+  content: {
+    padding: 16
   },
   header: {
     flexDirection: 'row',

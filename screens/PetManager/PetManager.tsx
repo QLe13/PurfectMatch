@@ -1,15 +1,13 @@
 import React, { Component, useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Button, TextInput, SectionList } from 'react-native'
+import { Text, StyleSheet, View, Button, TextInput, SectionList, TouchableOpacity } from 'react-native'
 
 interface Props {
     navigation: any;
 }
 
-const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
-
 type PetList = {
     title: string,
-    data: string[]
+    data: Pet[]
 }[]
 
 const PetManager: React.FC<Props> = ({ navigation }) => {
@@ -24,37 +22,150 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     }
 
     const [update, setUpdate] = useState(true)
+    const [myPetsUpdate, setMyPetsUpdate] = useState(true)
+    const [favoritedUpdate, setFavoritedUpdate] = useState(false)
+    const [requestsUpdate, setRequestsUpdate] = useState(false)
 
     function myPets() {
         setPetList([{
             title: "Cats",
-            data: ["Slay", "Boss"]
+            data: [
+                {
+                    name: "Slay",
+                    age: 10,
+                    type: "Cat",
+                    price: 1000,
+                    location: [0, 0],
+                },
+                {
+                    name: "Boss",
+                    age: 4,
+                    type: "Cat",
+                    price: 500,
+                    location: [0, 0],
+                },
+            ]
         },
         {
             title: "Dogs",
-            data: ["Socks", "Francine", "Queen", "Man"]
+            data: [
+                {
+                    name: "Socks",
+                    age: 11,
+                    type: "Dog",
+                    price: 100,
+                    location: [0, 0],
+                },
+                {
+                    name: "Francine",
+                    age: 1,
+                    type: "Dog",
+                    price: 750,
+                    location: [0, 0],
+                },
+                {
+                    name: "Queen",
+                    age: 9,
+                    type: "Dog",
+                    price: 900,
+                    location: [0, 0],
+                },
+                {
+                    name: "Man",
+                    age: 2,
+                    type: "Dog",
+                    price: 1000,
+                    location: [0, 0],
+                }
+            ]
         },
         {
             title: "Rats",
-            data: ["Ratty", "Rat Boy", "Dirt"]
+            data: [
+                {
+                    name: "Ratty",
+                    age: 1,
+                    type: "Rat",
+                    price: 50,
+                    location: [0, 0],
+                },
+                {
+                    name: "Rat Boy",
+                    age: 4,
+                    type: "Rat",
+                    price: 100,
+                    location: [0, 0],
+                },
+                {
+                    name: "Dirt",
+                    age: 0,
+                    type: "Dog",
+                    price: 10,
+                    location: [0, 0],
+                },
+                {
+                    name: "Dirt",
+                    age: 0,
+                    type: "Dog",
+                    price: 10,
+                    location: [0, 0],
+                },
+                {
+                    name: "Dirt",
+                    age: 0,
+                    type: "Dog",
+                    price: 10,
+                    location: [0, 0],
+                },
+                {
+                    name: "Dirt",
+                    age: 0,
+                    type: "Dog",
+                    price: 10,
+                    location: [0, 0],
+                }
+            ]
         }])
         setUpdate(!update)
+        setMyPetsUpdate(true)
+        setFavoritedUpdate(false)
+        setRequestsUpdate(false)
     }
 
     function favorited() {
         setPetList([{
             title: "Dogs",
-            data: ["Frank"]
+            data: [
+                {
+                    name: "Frank",
+                    age: 2,
+                    type: "Dog",
+                    price: 400,
+                    location: [0, 0],
+                },
+            ]
         }])
         setUpdate(!update)
+        setMyPetsUpdate(false)
+        setFavoritedUpdate(true)
+        setRequestsUpdate(false)
     }
 
     function requests() {
         setPetList([{
             title: "Cats",
-            data: ["Asjal wants Francine"]
+            data: [{
+                name: "Asjal Wants Francine",
+                age: 1000,
+                type: "Cat",
+                price: 100000,
+                location: [0, 0],
+            }]
         }])
         setUpdate(!update)
+        setMyPetsUpdate(false)
+        setFavoritedUpdate(false)
+        setRequestsUpdate(true)
     }
     //init whenever the page is loaded 
     useEffect(() => {
@@ -67,19 +178,26 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
                 <Text style={styles.headerText}>Purfect Match</Text>
                 <Button title="User Profile" onPress={handlePressToPetManager} />
             </View>
-            <View style={styles.header}>
-                <Button title="My Pets" onPress={myPets}></Button>
-                <Button title="Favorited" onPress={favorited}></Button>
-                <Button title="Requests" onPress={requests}></Button>
+            <View style={styles.swapButtons}>
+                <TouchableOpacity style={[styles.topButton, myPetsUpdate && { backgroundColor: '#ffffaa' }]} onPress={myPets}>
+                    <Text style={styles.buttonText}>My Pets</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.topButton, favoritedUpdate && { backgroundColor: '#ffffaa' }]} onPress={favorited}>
+                    <Text style={styles.buttonText}>Favorited</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={[styles.topButton, requestsUpdate && { backgroundColor: '#ffffaa' }]} onPress={requests}>
+                    <Text style={styles.buttonText}>Requests</Text>
+                </TouchableOpacity>
             </View>
             <View style={styles.listcontainer}>
                 <SectionList
                     sections={petList}
                     extraData={update}
                     renderItem={({ item }) => (
-                        <View style={styles.petlabel}>
-                            <Text style={styles.item} onPress={() => navigation.navigate('PetProfile', { petName: item })}>{item}</Text>
-                        </View>
+                        <TouchableOpacity style={styles.petlabel} onPress={() => navigation.navigate('PetProfile', { pet: item })}>
+                            <Text style={{ fontSize: 26 }}>{item.name}</Text>
+                            <Text style={{ fontSize: 24 }}>{'>'}</Text>
+                        </TouchableOpacity>
                     )}
                     renderSectionHeader={({ section: { title } }) => (
                         <Text style={styles.sectionHeader}>{title}</Text>
@@ -95,6 +213,7 @@ const styles = StyleSheet.create({
         flex: 1,
         height: '100%',
         flexDirection: 'column',
+        backgroundColor: 'white',
     },
     listcontainer: {
         padding: 10,
@@ -108,9 +227,29 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-        paddingVertical: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: 'gray'
+        paddingVertical: 10
+    },
+    buttonText: {
+        fontSize: 20,
+    },
+    swapButtons: {
+        fontSize: 30,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginTop: 10,
+    },
+    topButton: {
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingTop: 10,
+        paddingBottom: 10,
+        backgroundColor: 'white',
+        borderColor: 'gray',
+        borderWidth: 1,
+        borderRadius: 10,
     },
     sectionHeader: {
         paddingTop: 2,
@@ -119,64 +258,26 @@ const styles = StyleSheet.create({
         paddingBottom: 2,
         fontSize: 28,
         fontWeight: 'bold',
-        backgroundColor: 'rgba(247,247,247,1.0)',
-    },
-    item: {
-        padding: 5,
-        fontSize: 25,
-        height: 44,
-        borderRadius: 10
+        backgroundColor: 'white',
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'gray',
     },
     petlabel: {
-        backgroundColor: '#f9c2ff',
+        backgroundColor: '#ffffaa',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
         padding: 20,
-        marginVertical: 8,
-        borderRadius: 10
+        paddingLeft: 20,
+        marginHorizontal: 10,
+        marginVertical: 6,
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'gray'
     },
     headerText: {
         fontSize: 20,
         fontWeight: 'bold',
-    },
-    label: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 5,
-        borderRadius: 10
-    },
-    inputContainer: {
-        marginBottom: 16,
-    },
-    userNameText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    userNameView: {
-        flexDirection: 'row',
-        flexGrow: 1,
-        padding: 16,
-        justifyContent: 'center',
-    },
-    locationInputContainer: {
-        flexDirection: 'column',
-        alignItems: 'flex-start',
-    },
-    locationInput: {
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        padding: 10,
-        flexGrow: 1,
-        marginRight: 10,
-    },
-    locationInputInactive: {
-        fontSize: 16,
-        padding: 10,
-        flexGrow: 1,
-        marginRight: 10,
-    },
-    editButton: {
-        flexGrow: 1,
-        padding: 16,
-    },
+    }
 });
 export default PetManager;

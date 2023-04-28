@@ -1,125 +1,150 @@
-import React, { Component, useState, useEffect } from 'react'
-import { Text, StyleSheet, View, Button, TextInput, SectionList } from 'react-native'
+import React, { Component, useState, ChangeEvent, useEffect } from "react";
+import { ScrollView, Text, StyleSheet, View, Button, TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from "react-native";
+import Avatar from "../AddPet/Avatar/Avatar";
 
 interface Props {
     navigation: any;
+    route: any;
 }
 
-const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
+const initPetForm: Pet = {
+    name: '',
+    age: 0,
+    type: '',
+    price: 0,
+    location: [0, 0],
+}
 
-type PetList = {
-    title: string,
-    data: string[]
-}[]
+const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Rodent", "Rabbit", "Spider", "Insect", "Pig"]
 
-const PetProfile: React.FC<Props> = ({ navigation }) => {
-    const init: PetList = [{ title: "No Pets Yet", data: [] }]
-    const [petList, setPetList]: [PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
-    // function handlePressToProfile() {
-    //     navigation.navigate('UserProfile');
-    // }
-    // function handlePressToPetManager() {
-    //     navigation.navigate('PetManager');
-    // }
+const PetProfile: React.FC<Props> = ({ navigation, route }) => {
+    const pet: Pet = route.params.pet
+    const [petForm, setPetForm] = useState<Pet>(initPetForm)
+    const [name, setName] = useState<string>('')
+    const [age, setAge] = useState<number>(0)
+    const [type, setType] = useState<string>('')
+    const [price, setPrice] = useState<number>(0)
 
-    const [update, setUpdate] = useState(true)
+    const handleNameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
+        setPetForm({ ...petForm, name: event.nativeEvent.text })
+        setName(event.nativeEvent.text)
+    }
+    const handleAgeChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
+        setPetForm({ ...petForm, age: parseInt(event.nativeEvent.text) || 0 })
+        setAge(parseInt(event.nativeEvent.text) || 0)
+    }
+    const handleTypeChange = (t: string) => {
+        setPetForm({ ...petForm, type: t })
+        setType(t)
+    }
+    const handlePriceChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
+        setPetForm({ ...petForm, price: parseInt(event.nativeEvent.text) } || 0)
+        setPrice(parseInt(event.nativeEvent.text) || 0)
+    }
 
-    //init whenever the page is loaded 
-    useEffect(() => {
-    }, [])
+
+    const handleLocationChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setPetForm({ ...petForm, location: [0, 0] })
+    }
+
+
+
+
     return (
-        <View style={styles.container}>
-            <Text>hey</Text>
-        </View>
+        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
+            <View style={styles.header}>
+                <Button title="Add Pet" onPress={() => { }} />
+                <Text style={styles.headerText}>Purfect Match</Text>
+                <Button title="Find Pet" onPress={() => { }} />
+            </View>
+            <ScrollView style={{ height: "100%" }}>
+                <View style={styles.container}>
+                    <Avatar />
+                    <View style={styles.nameContainer}>
+                        <Text style={styles.nameInput}>{pet.name}</Text>
+                    </View>
+                    <View style={styles.typeContainer}>
+                        <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <Text style={{ fontSize: 20 }}>Type: {pet.type}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.ageContainer}>
+                        <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <Text style={{ fontSize: 20 }}>Age: {pet.age}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.priceContainer}>
+                        <Text style={styles.priceText}>Price: ${pet.price}</Text>
+                    </View>
+                </View>
+            </ScrollView>
+        </KeyboardAvoidingView>
     );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        height: '100%',
-        flexDirection: 'column',
-    },
-    listcontainer: {
-        padding: 10,
-        flex: 1,
-        flexDirection: 'column',
-        marginBottom: 20
-    },
     header: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
         paddingHorizontal: 20,
-        paddingVertical: 10
-    },
-    sectionHeader: {
-        paddingTop: 2,
-        paddingLeft: 10,
-        paddingRight: 10,
-        paddingBottom: 2,
-        fontSize: 28,
-        fontWeight: 'bold',
-        backgroundColor: 'rgba(247,247,247,1.0)',
-    },
-    item: {
-        padding: 5,
-        fontSize: 25,
-        height: 44,
-        borderRadius: 10
-    },
-    petlabel: {
-        backgroundColor: '#f9c2ff',
-        padding: 20,
-        marginVertical: 8,
-        borderRadius: 10
+        paddingVertical: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: '#ddd',
     },
     headerText: {
         fontSize: 20,
         fontWeight: 'bold',
     },
-    label: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        marginBottom: 5,
-        borderRadius: 10
-    },
-    inputContainer: {
-        marginBottom: 16,
-    },
-    userNameText: {
-        fontSize: 20,
-        fontWeight: 'bold',
-    },
-    userNameView: {
-        flexDirection: 'row',
-        flexGrow: 1,
-        padding: 16,
-        justifyContent: 'center',
-    },
-    locationInputContainer: {
+    container: {
+        display: 'flex',
         flexDirection: 'column',
-        alignItems: 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingTop: 10,
     },
-    locationInput: {
-        fontSize: 16,
-        borderWidth: 1,
-        borderColor: '#ccc',
-        padding: 10,
-        flexGrow: 1,
-        marginRight: 10,
+    nameContainer: {
+        fontWeight: 'bold',
+        display: 'flex',
+        marginTop: 10,
     },
-    locationInputInactive: {
-        fontSize: 16,
-        padding: 10,
-        flexGrow: 1,
-        marginRight: 10,
+    nameInput: {
+        fontSize: 20,
+        fontWeight: 'bold',
     },
-    editButton: {
-        flexGrow: 1,
-        padding: 16,
+    typeContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 50,
+        width: '90%',
+    },
+    ageContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 50,
+        width: '90%',
+
+    },
+    priceContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        height: 50,
+        width: '90%',
+    },
+    priceText: {
+        fontSize: 20,
     },
 });
+
 export default PetProfile;
