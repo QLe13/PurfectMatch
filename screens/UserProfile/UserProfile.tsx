@@ -8,16 +8,16 @@ interface Props {
 }
 
 const UserProfile: React.FC<Props> = ({ navigation }) => {
-  const defaultUserName:string = "Peep"
+  const defaultUserName: string = "Peep"
   const [userName, setUserName] = useState<string>(defaultUserName);
-  const defaultLocation:string = "San Francisco, CA"
+  const defaultLocation: string = "San Francisco, CA"
   const [location, setLocation] = useState<string>(defaultLocation);
   const [isEditingLocation, setIsEditingLocation] = useState<boolean>(false);
-  const defaultEmail:string = "hehe@gmail.com"
+  const defaultEmail: string = "hehe@gmail.com"
   const [email, setEmail] = useState<string>(defaultEmail);
-  const defaultPhoneNumber:string = "123-456-7890"
+  const defaultPhoneNumber: string = "123-456-7890"
   const [phoneNumber, setPhoneNumber] = useState<string>(defaultPhoneNumber);
-  const defaultBio:string = "I love animals!"
+  const defaultBio: string = "I love animals!"
   const [bio, setBio] = useState<string>(defaultBio);
 
   const handleEditLocation = () => {
@@ -35,7 +35,7 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
   function handlePressToSwipeInterface() {
     navigation.navigate('SwipingInterface')
   }
-  
+
   function handlePressToSearchPet() {
     navigation.navigate('FilterSearch')
   }
@@ -44,36 +44,36 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
     <View>
       <View style={styles.header}>
         <TouchableOpacity onPress={handlePressToAddPet}>
-          <Image 
+          <Image
             source={require('../.././assets/plusicon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToSwipeInterface}>
-          <Image 
+          <Image
             source={require('../.././assets/icon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
-          ></Image>
-          </TouchableOpacity>
-        <TouchableOpacity onPress={handlePressToSearchPet}>
-          <Image 
-            source={require('../.././assets/searchicon.png')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 55, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
-        </View>
+        <TouchableOpacity onPress={handlePressToSearchPet}>
+          <Image
+            source={require('../.././assets/searchicon.png')}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
+          ></Image>
+        </TouchableOpacity>
+      </View>
       <View style={styles.container}>
         <View style={styles.userNameView}>
           <View style={styles.avcontainer}>
-                  {
-                      <Image source={require('./profilePic/pepe.png')} style={{ width: 200, height: 200 }} />//&&image
-                  }
-                      <View style={styles.uploadBtnContainer}>
-                          <TouchableOpacity style={styles.uploadBtn} >
-                              <Text> Image</Text> 
-                              {/* {image ? 'Edit' : 'Upload'} */}
-                          </TouchableOpacity>
-                      </View>
+            {
+              <Image source={require('./profilePic/pepe.png')} style={{ width: 200, height: 200 }} />//&&image
+            }
+            <View style={styles.uploadBtnContainer}>
+              <TouchableOpacity style={styles.uploadBtn} >
+                <Text> Image</Text>
+                {/* {image ? 'Edit' : 'Upload'} */}
+              </TouchableOpacity>
+            </View>
           </View>
           <Text style={styles.userNameText}>{userName}</Text>
         </View>
@@ -85,7 +85,7 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
                 <TextInput
                   style={styles.locationInput}
                   value={location}
-                  onChangeText={setLocation}/>
+                  onChangeText={setLocation} />
               </>
             ) : (
               <>
@@ -99,19 +99,27 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
           <View style={styles.locationInputContainer}>
             {isEditingLocation ? (
               <>
-                <View style={{flexDirection:'row'}}>
-                <Text style={{marginTop:10,fontSize: 16}}> - Email: </Text>
+                <TextInput
+                  style={styles.locationInput}
+                  value={email}
+                  onChangeText={setEmail} />
+                <TextInput
+                  style={styles.locationInput}
+                  value={phoneNumber}
+                  onChangeText={setPhoneNumber} />
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ marginTop: 10, fontSize: 16 }}> - Email: </Text>
                   <TextInput
                     style={styles.locationInput}
                     value={email}
-                    onChangeText={setEmail}/>
+                    onChangeText={setEmail} />
                 </View>
-                <View style={{flexDirection:'row'}}>
-                <Text style={{marginTop:10,fontSize: 16}}> - Phone #: </Text>
+                <View style={{ flexDirection: 'row' }}>
+                  <Text style={{ marginTop: 10, fontSize: 16 }}> - Phone #: </Text>
                   <TextInput
                     style={styles.locationInput}
                     value={phoneNumber}
-                    onChangeText={setPhoneNumber}/>
+                    onChangeText={setPhoneNumber} />
                 </View>
               </>
             ) : (
@@ -120,9 +128,9 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
                 <Text style={styles.locationInputInactive}> - Phone #: {phoneNumber}</Text>
               </>
             )}
-          </View>
-        </View>
-        
+          </View >
+        </View >
+
         <View style={styles.inputContainer}>
           <Text style={styles.label}>Bio:</Text>
           <View style={styles.locationInputContainer}>
@@ -131,28 +139,34 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
                 <TextInput
                   style={styles.locationInput}
                   value={bio}
-                  onChangeText={setBio}/>
-              </>):(
+                  onChangeText={setBio} />
+              </>) : (
               <>
                 <Text style={styles.locationInputInactive}>{bio}</Text>
               </>)}
           </View>
         </View>
-        <View style={styles.editButtonField}>
-              {isEditingLocation ? (
-                <>
+        <View style={styles.editButton}>
+          {isEditingLocation ? (
+            <Button title="Save" onPress={handleSaveLocation} />
+          ) : (
+            <Button title="Edit Profile" onPress={handleEditLocation} />)}
+          <View style={styles.editButtonField}>
+            {isEditingLocation ? (
+              <>
                 <TouchableOpacity style={styles.editButton} onPress={handleSaveLocation}>
-                  <Text style={{fontSize:25}}>Save</Text>
+                  <Text style={{ fontSize: 25 }}>Save</Text>
                 </TouchableOpacity>
-                </>
-              ):(
-                <>
+              </>
+            ) : (
+              <>
                 <TouchableOpacity style={styles.editButton} onPress={handleEditLocation}>
-                  <Text style={{fontSize:25}}>Edit Info</Text>
+                  <Text style={{ fontSize: 25 }}>Edit Info</Text>
                 </TouchableOpacity>
-                </>)}
+              </>)}
+          </View>
         </View>
-      </View>
+      </View >
     </View>
   );
 }
@@ -229,28 +243,28 @@ const styles = StyleSheet.create({
     borderRadius: 7,
     borderWidth: 1,
   },
-  avcontainer:{
-    elevation:2,
-    height:200,
-    width:200,
-    backgroundColor:'#efefef',
-    position:'relative',
-    borderRadius:999,
-    overflow:'hidden',
-},
-uploadBtnContainer:{
-    opacity:0.7,
-    position:'absolute',
-    right:0,
-    bottom:0,
-    backgroundColor:'lightgrey',
-    width:'100%',
-    height:'25%',
-},
-uploadBtn:{
-    display:'flex',
-    alignItems:"center",
-    justifyContent:'center'
-}
+  avcontainer: {
+    elevation: 2,
+    height: 200,
+    width: 200,
+    backgroundColor: '#efefef',
+    position: 'relative',
+    borderRadius: 999,
+    overflow: 'hidden',
+  },
+  uploadBtnContainer: {
+    opacity: 0.7,
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'lightgrey',
+    width: '100%',
+    height: '25%',
+  },
+  uploadBtn: {
+    display: 'flex',
+    alignItems: "center",
+    justifyContent: 'center'
+  }
 });
 export default UserProfile;
