@@ -3,7 +3,7 @@ import React from 'react'
 
 const Avatar:React.FC = () => {
   return (
-    <View style={styles.container}>
+    <View style={styles.avcontainer}>
                 {
                     <Image source={require('./profilePic/pig.jpeg')} style={{ width: 200, height: 200 }} />//&&image
                 }
@@ -18,7 +18,7 @@ const Avatar:React.FC = () => {
 }
 
 const styles = StyleSheet.create({
-    container:{
+    avcontainer:{
         elevation:2,
         height:200,
         width:200,
