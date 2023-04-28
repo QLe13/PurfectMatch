@@ -33,6 +33,7 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
     const [showMap, setShowMap] = useState<boolean>(false)
     const initCoordinates: Coordinate = [0, 0]
 
+
     const handleNameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setPetForm({ ...petForm, name: event.nativeEvent.text })
         setName(event.nativeEvent.text)
@@ -79,32 +80,44 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
     }
 
     return (
-        <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50}>
-            <View style={styles.header}>
-                <TouchableOpacity onPress={handlePressToProfile}>
-                    <Image
-                        source={require('../.././assets/cancel.png')}
-                        style={{ width: 50, height: 50, alignContent: 'center' }}
-                    ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressToSwipeInterface}>
-                    <Image
-                        source={require('../.././assets/icon.png')}
-                        style={{ width: 50, height: 50, alignContent: 'center' }}
-                    ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressToPetManager}>
-                    <Image
-                        source={require('../.././assets/greencheck.png')}
-                        style={{ width: 50, height: 50, alignContent: 'center' }}
-                    ></Image>
-                </TouchableOpacity>
-            </View>
-            <ScrollView style={{ height: '100%' }} >
-                <View style={styles.container}>
-                    <Avatar />
-                    <View style={styles.nameContainer}>
-                        <TextInput style={styles.nameInput} value={name} onChange={handleNameChange} placeholder="Name:" />
+    <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50} style={{flex:1}}>
+        <View style={styles.header}>
+            <TouchableOpacity onPress = {handlePressToProfile}>
+                <Image 
+                    source={require('../.././assets/cancel.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
+            <Image 
+                source={require('../.././assets/icon.png')}
+                style={{width: 50, height: 50, alignContent: 'center'}}
+            ></Image>
+            <TouchableOpacity onPress = {handlePressToPetManager}>
+                <Image 
+                    source={require('../.././assets/greencheck.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
+        </View>
+        <ScrollView style= {{height:'100%'}} >
+            <View style={styles.container}>
+                <Avatar />
+                <View style={styles.nameContainer}>
+                    <TextInput style={styles.nameInput} value={name} onChange={handleNameChange} placeholder="Name:"/>
+                </View>
+                <View style={styles.typeContainer}>
+                    <View style={{display:"flex", flexDirection:"column", justifyContent:"center"}}>
+                        <Text style={{fontSize: 20}}>Type:</Text>
+                    </View>
+                    <View style={styles.picker}>
+                        <Picker selectedValue={type}
+                        onValueChange={(itemValue,index) => handleTypeChange(itemValue)}
+                        numberOfLines={1}
+                        itemStyle={{ height: 50, opacity: 1}}> 
+                            {petTypes.map((petType) => {
+                                return <Picker.Item key={petType} label={petType} value={petType}/>
+                            })}
+                        </Picker>
                     </View>
                     <View style={styles.typeContainer}>
                         <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
@@ -181,7 +194,7 @@ const styles = StyleSheet.create({
     nameContainer: {
         fontWeight: 'bold',
         display: 'flex',
-        marginTop: 15,
+        marginTop: 20,
     },
     nameInput: {
         fontSize: 20,
@@ -196,7 +209,7 @@ const styles = StyleSheet.create({
     typeContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -205,12 +218,11 @@ const styles = StyleSheet.create({
     ageContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
         width: '90%',
-
     },
     ageInput: {
         fontSize: 20,
@@ -223,7 +235,7 @@ const styles = StyleSheet.create({
     priceContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -243,7 +255,7 @@ const styles = StyleSheet.create({
     locationContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
