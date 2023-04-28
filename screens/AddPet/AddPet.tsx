@@ -74,6 +74,10 @@ const AddPet: React.FC<Props> = ({navigation}) => {
         navigation.navigate('PetManager')
     }
 
+    function handlePressToSwipeInterface() {
+        navigation.navigate('SwipingInterface')
+    }
+
     return (
     <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50}>
         <View style={styles.header}>
@@ -83,10 +87,12 @@ const AddPet: React.FC<Props> = ({navigation}) => {
                     style={{width: 50, height: 50, alignContent: 'center'}}
                 ></Image>
             </TouchableOpacity>
-            <Image 
-                source={require('../.././assets/icon.png')}
-                style={{width: 50, height: 50, alignContent: 'center'}}
-            ></Image>
+            <TouchableOpacity onPress = {handlePressToSwipeInterface}>
+                <Image 
+                    source={require('../.././assets/icon.png')}
+                    style={{width: 50, height: 50, alignContent: 'center'}}
+                ></Image>
+            </TouchableOpacity>
             <TouchableOpacity onPress = {handlePressToPetManager}>
                 <Image 
                     source={require('../.././assets/greencheck.png')}
