@@ -33,6 +33,7 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
     const [showMap, setShowMap] = useState<boolean>(false)
     const initCoordinates: Coordinate = [0, 0]
 
+
     const handleNameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setPetForm({ ...petForm, name: event.nativeEvent.text })
         setName(event.nativeEvent.text)
@@ -156,7 +157,7 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
                         </View>}
                 </View>
             </ScrollView>
-        </KeyboardAvoidingView>
+        </KeyboardAvoidingView >
     );
 };
 
@@ -185,7 +186,7 @@ const styles = StyleSheet.create({
     nameContainer: {
         fontWeight: 'bold',
         display: 'flex',
-        marginTop: 15,
+        marginTop: 20,
     },
     nameInput: {
         fontSize: 20,
@@ -200,7 +201,7 @@ const styles = StyleSheet.create({
     typeContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -209,12 +210,11 @@ const styles = StyleSheet.create({
     ageContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
         width: '90%',
-
     },
     ageInput: {
         fontSize: 20,
@@ -227,7 +227,7 @@ const styles = StyleSheet.create({
     priceContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
     locationContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 15,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
