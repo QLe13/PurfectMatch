@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, Text, View, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import { Platform, Text, View, StyleSheet, TouchableOpacity, ActivityIndicator, Image} from 'react-native';
 import * as Location from 'expo-location';
 import MapView, { Marker, MapViewProps } from 'react-native-maps';
 
@@ -12,6 +12,7 @@ const ShowMap: React.FC<Props> = ({setLocation, setShowMap }) => {
   const [location, setCurLocation] = useState<Coordinate>([0,0]);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [applyIsLoading, setApplyIsLoading] = useState<boolean>(false);
 
 
   useEffect(() => {
@@ -41,15 +42,20 @@ const ShowMap: React.FC<Props> = ({setLocation, setShowMap }) => {
     const handleRegionChange = (region: MapViewProps['region']) => {
         setCurLocation([region?.latitude||0, region?.longitude||0]);
       };
+    const handleApplyClick = () => {
+        setApplyIsLoading(true)
+        setTimeout(()=>{setShowMap(false)}, 3000)
+        setApplyIsLoading(false)
+    }
   return (
     <View style={styles.container}>
         <View style={styles.buttonsContainer}>
-            <TouchableOpacity style={styles.closeButton} onPress={()=>setShowMap(false)}>
-                <Text style={{fontSize:25}}>Close</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.applyButton} onPress={()=>setShowMap(false)}>
-                <Text style={{fontSize:25}}>Apply</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.closeButton} onPress={()=>setShowMap(false)}>
+                    <Text style={{fontSize:25}}>Close</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.applyButton} onPress={()=>handleApplyClick()}>
+                    <Text style={{fontSize:25}}>Apply</Text>
+                </TouchableOpacity>
         </View>
         <MapView style={styles.mapView}
             region={
@@ -61,7 +67,6 @@ const ShowMap: React.FC<Props> = ({setLocation, setShowMap }) => {
                 }
             }
             onRegionChangeComplete={handleRegionChange}>
-            <Marker title='Home' coordinate={{latitude: location[0], longitude: location[1]}} />
         </MapView>
         <View style={styles.loading}>
             {!isLoading && 
@@ -71,6 +76,7 @@ const ShowMap: React.FC<Props> = ({setLocation, setShowMap }) => {
             </>
             }
         </View>
+        {isLoading&&<Image source={require('./navigation.png')} style={styles.nav}/>}
     </View>
   );
 }
@@ -120,6 +126,27 @@ const styles = StyleSheet.create({
         paddingHorizontal: 10,
         paddingVertical: 5,
     },
+    nav: {
+        position: 'absolute',
+        zIndex: 10,
+        height: 76,
+        width: 50,
+        top: '37%',
+        left: '41.5%',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+    },
+    applyButtonLoading: {
+        backgroundColor: '#fff',
+        borderRadius: 7,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+    }
+
 
 })
 
