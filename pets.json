@@ -1,0 +1,145 @@
+{
+    "myPets": {
+        "Cats": [
+            {
+                "name": "Slay",
+                "age": 10,
+                "type": "Cat",
+                "price": 1000,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Boss",
+                "age": 4,
+                "type": "Cat",
+                "price": 500,
+                "location": [
+                    0,
+                    0
+                ]
+            }
+        ],
+        "Dogs": [
+            {
+                "name": "Socks",
+                "age": 11,
+                "type": "Dog",
+                "price": 100,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Francine",
+                "age": 1,
+                "type": "Dog",
+                "price": 750,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Queen",
+                "age": 9,
+                "type": "Dog",
+                "price": 900,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Man",
+                "age": 2,
+                "type": "Dog",
+                "price": 1000,
+                "location": [
+                    0,
+                    0
+                ]
+            }
+        ],
+        "Rodents": [
+            {
+                "name": "Ratty",
+                "age": 1,
+                "type": "Rodent",
+                "price": 50,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Rat Boy",
+                "age": 4,
+                "type": "Rodent",
+                "price": 100,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Dirt",
+                "age": 0,
+                "type": "Rodent",
+                "price": 20,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Speedy",
+                "age": 2,
+                "type": "Rodent",
+                "price": 50,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Dirty",
+                "age": 5,
+                "type": "Rodent",
+                "price": 500,
+                "location": [
+                    0,
+                    0
+                ]
+            },
+            {
+                "name": "Whom",
+                "age": 0,
+                "type": "Rodent",
+                "price": 100,
+                "location": [
+                    0,
+                    0
+                ]
+            }
+        ]
+    },
+    "favorited": {},
+    "requested": {
+        "Fish": [
+            {
+                "name": "Fishy",
+                "age": 1,
+                "type": "Fish",
+                "price": 40,
+                "location": [
+                    0,
+                    0
+                ]
+            }
+        ]
+    }
+}

@@ -3,26 +3,31 @@ import { ScrollView, Text, StyleSheet, View, Button, TextInput, Image, Touchable
 import { Slider } from '@miblanchard/react-native-slider';
 import { Picker } from '@react-native-picker/picker';
 import { Chip } from 'react-native-paper';
+import petJSON from '../../pets.json'
 
 const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
 interface Props {
   navigation: any;
+  route: any;
 }
-const FilterSearch: React.FC<Props> = ({ navigation }) => {
+const FilterSearch: React.FC<Props> = ({ navigation, route }) => {
   const [selectedTypes, setselectedTypes] = useState<string[]>([]);
   const [selectedGender, setSelectedGender] = useState<'male' | 'female' | null>(null);
   const [selectedAge, setSelectedAge] = useState<string>('');
   const [selectedPriceRange, setSelectedPriceRange] = useState<string>('$0-$500');
   const [selectedDistance, setSelectedDistance] = useState<number>(20);
+
+  // const petJSON = route.params.p
+
   function handlePressToProfile() {
-    navigation.navigate('UserProfile');
+    navigation.navigate('UserProfile', { p: petJSON });
   }
   function handlePressToPetManager() {
-    navigation.navigate('PetManager');
+    navigation.navigate('PetManager', { p: petJSON });
   }
   function handlePressToSwipeInterface() {
     console.log("search")
-    navigation.navigate('SwipingInterface')
+    navigation.navigate('SwipingInterface', { p: petJSON })
   }
   const handleSelect = (val: string) => {
     setselectedTypes((prev: string[]) =>
@@ -36,20 +41,20 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   return (
     <View style={styles.biggerContainer}>
       <View style={styles.header}>
-        <TouchableOpacity onPress = {handlePressToProfile}>
-          <Image 
+        <TouchableOpacity onPress={handlePressToProfile}>
+          <Image
             source={require('../.././assets/profileicon.webp')}
-            style={{width: 50, height: 50, alignContent: 'center'}}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
         <Image
           source={require('../.././assets/icon.png')}
           style={{ width: 55, height: 50, alignContent: 'center' }}
         ></Image>
-        <TouchableOpacity onPress = {handlePressToPetManager}>  
-          <Image 
+        <TouchableOpacity onPress={handlePressToPetManager}>
+          <Image
             source={require('../.././assets/caticon2.jpg')}
-            style={{width: 50, height: 70, alignContent: 'center', marginTop: 10}}
+            style={{ width: 50, height: 70, alignContent: 'center', marginTop: 10 }}
           ></Image>
         </TouchableOpacity>
       </View>
@@ -114,6 +119,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
           <View style={styles.picker}>
             <Picker
               selectedValue={selectedPriceRange}
+              itemStyle={{ height: 44 }}
               onValueChange={(itemValue, itemIndex) => setSelectedPriceRange(itemValue)}>
               <Picker.Item label="$0-$500" value="$0-$500" />
               <Picker.Item label="$500-$1000" value="$500-$1000" />
@@ -133,7 +139,9 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
             onValueChange={(value) => setSelectedDistance(Number(value))} />
         </View>
         <View>
-          <Button title="Search for purfect match!" onPress={handlePressToSwipeInterface} />
+          <TouchableOpacity style={styles.searchButton} onPress={handlePressToSwipeInterface}>
+            <Text style={{ fontSize: 26, textAlign: 'center' }}>Search for purrfect match!</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
@@ -203,10 +211,23 @@ const styles = StyleSheet.create({
     borderColor: '#ccc',
     borderRadius: 2,
     marginVertical: 10,
+    height: 44,
   },
   mileDisplay: {
     alignItems: 'center',
-  }
+  },
+  searchButton: {
+    backgroundColor: '#ffffaa',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 20,
+    paddingLeft: 20,
+    marginHorizontal: 10,
+    marginVertical: 6,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'gray'
+  },
 });
 
 export default FilterSearch;

@@ -1,5 +1,5 @@
 import React, { Component, useState, ChangeEvent, useEffect } from "react";
-import { ScrollView, Text, StyleSheet, View, Button, TextInput, NativeSyntheticEvent, TextInputChangeEventData, Dimensions, Keyboard, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from "react-native";
+import { ScrollView, Text, StyleSheet, View, NativeSyntheticEvent, TextInputChangeEventData, KeyboardAvoidingView, Image } from "react-native";
 import Avatar from "../AddPet/Avatar/Avatar";
 
 interface Props {
@@ -20,6 +20,7 @@ const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Rac
 
 const PetProfile: React.FC<Props> = ({ navigation, route }) => {
     const pet: Pet = route.params.pet
+    const petJSON = route.params.petJSON
     const [petForm, setPetForm] = useState<Pet>(initPetForm)
     const [name, setName] = useState<string>('')
     const [age, setAge] = useState<number>(0)
@@ -54,9 +55,10 @@ const PetProfile: React.FC<Props> = ({ navigation, route }) => {
     return (
         <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={100}>
             <View style={styles.header}>
-                <Button title="Add Pet" onPress={() => { }} />
-                <Text style={styles.headerText}>Purfect Match</Text>
-                <Button title="Find Pet" onPress={() => { }} />
+                <Image
+                    source={require('../.././assets/icon.png')}
+                    style={{ width: 55, height: 50, alignContent: 'center' }}
+                ></Image>
             </View>
             <ScrollView style={{ height: "100%" }}>
                 <View style={styles.container}>
@@ -64,18 +66,29 @@ const PetProfile: React.FC<Props> = ({ navigation, route }) => {
                     <View style={styles.nameContainer}>
                         <Text style={styles.nameInput}>{pet.name}</Text>
                     </View>
-                    <View style={styles.typeContainer}>
+                    <View style={styles.textContainer}>
                         <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                            <Text style={{ fontSize: 20 }}>Type: {pet.type}</Text>
+                            <Text style={styles.label}>Type:</Text>
+                            <Text style={styles.locationInputInactive}>{pet.type}</Text>
                         </View>
                     </View>
-                    <View style={styles.ageContainer}>
+                    <View style={styles.textContainer}>
                         <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
-                            <Text style={{ fontSize: 20 }}>Age: {pet.age}</Text>
+                            <Text style={styles.label}>Age:</Text>
+                            <Text style={styles.locationInputInactive}>{pet.age}</Text>
                         </View>
                     </View>
-                    <View style={styles.priceContainer}>
-                        <Text style={styles.priceText}>Price: ${pet.price}</Text>
+                    <View style={styles.textContainer}>
+                        <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <Text style={styles.label}>Price:</Text>
+                            <Text style={styles.locationInputInactive}>${pet.price}</Text>
+                        </View>
+                    </View>
+                    <View style={styles.textContainer}>
+                        <View style={{ display: "flex", flexDirection: "column", justifyContent: "center" }}>
+                            <Text style={styles.label}>Bio:</Text>
+                            <Text style={styles.locationInputInactive}>Adorable!</Text>
+                        </View>
                     </View>
                 </View>
             </ScrollView>
@@ -85,7 +98,6 @@ const PetProfile: React.FC<Props> = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     header: {
-        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
         backgroundColor: '#fff',
@@ -114,29 +126,10 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: 'bold',
     },
-    typeContainer: {
+    textContainer: {
         display: 'flex',
         flexDirection: 'row',
-        marginTop: 10,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: 50,
-        width: '90%',
-    },
-    ageContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: 10,
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        height: 50,
-        width: '90%',
-
-    },
-    priceContainer: {
-        display: 'flex',
-        flexDirection: 'row',
-        marginTop: 10,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'space-between',
         height: 50,
@@ -144,6 +137,17 @@ const styles = StyleSheet.create({
     },
     priceText: {
         fontSize: 20,
+    },
+    label: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        marginBottom: 5,
+    },
+    locationInputInactive: {
+        fontSize: 16,
+        padding: 10,
+        flexGrow: 1,
+        marginRight: 10,
     },
 });
 

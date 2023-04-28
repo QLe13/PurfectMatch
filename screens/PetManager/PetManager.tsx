@@ -1,8 +1,10 @@
 import React, { Component, useState, useEffect } from 'react'
+// import petJSON from '../../pets.json'
 import { Text, StyleSheet, View, Button, TextInput, SectionList, Image, TouchableOpacity } from 'react-native'
 
 interface Props {
     navigation: any;
+    route: any;
 }
 
 type PetList = {
@@ -10,15 +12,17 @@ type PetList = {
     data: Pet[]
 }[]
 
-const PetManager: React.FC<Props> = ({ navigation }) => {
+const PetManager: React.FC<Props> = ({ navigation, route }) => {
     const init: PetList = [{ title: "No Pets Yet", data: [] }]
     const [petList, setPetList]: [PetList, React.Dispatch<React.SetStateAction<PetList>>] = useState(init)
 
+    const petJSON = route.params.p
+
     function handlePressToFilterSearch() {
-        navigation.navigate('FilterSearch');
+        navigation.navigate('FilterSearch', { p: petJSON });
     }
     function handlePressToUserProfile() {
-        navigation.navigate('UserProfile');
+        navigation.navigate('UserProfile', { p: petJSON });
     }
 
     const [update, setUpdate] = useState(true)
@@ -26,106 +30,22 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     const [favoritedUpdate, setFavoritedUpdate] = useState(false)
     const [requestsUpdate, setRequestsUpdate] = useState(false)
 
+    function pullData(list: string) {
+        const myPets: any = petJSON[list]
+        let petList = []
+        for (let k in myPets) {
+            let lst = []
+            for (let pet of myPets[k]) {
+                lst.push(pet)
+            }
+            petList.push({ title: k, data: lst })
+        }
+        return petList
+    }
+
     function myPets() {
-        setPetList([{
-            title: "Cats",
-            data: [
-                {
-                    name: "Slay",
-                    age: 10,
-                    type: "Cat",
-                    price: 1000,
-                    location: [0, 0],
-                },
-                {
-                    name: "Boss",
-                    age: 4,
-                    type: "Cat",
-                    price: 500,
-                    location: [0, 0],
-                },
-            ]
-        },
-        {
-            title: "Dogs",
-            data: [
-                {
-                    name: "Socks",
-                    age: 11,
-                    type: "Dog",
-                    price: 100,
-                    location: [0, 0],
-                },
-                {
-                    name: "Francine",
-                    age: 1,
-                    type: "Dog",
-                    price: 750,
-                    location: [0, 0],
-                },
-                {
-                    name: "Queen",
-                    age: 9,
-                    type: "Dog",
-                    price: 900,
-                    location: [0, 0],
-                },
-                {
-                    name: "Man",
-                    age: 2,
-                    type: "Dog",
-                    price: 1000,
-                    location: [0, 0],
-                }
-            ]
-        },
-        {
-            title: "Rats",
-            data: [
-                {
-                    name: "Ratty",
-                    age: 1,
-                    type: "Rat",
-                    price: 50,
-                    location: [0, 0],
-                },
-                {
-                    name: "Rat Boy",
-                    age: 4,
-                    type: "Rat",
-                    price: 100,
-                    location: [0, 0],
-                },
-                {
-                    name: "Dirt",
-                    age: 0,
-                    type: "Dog",
-                    price: 10,
-                    location: [0, 0],
-                },
-                {
-                    name: "Dirt",
-                    age: 0,
-                    type: "Dog",
-                    price: 10,
-                    location: [0, 0],
-                },
-                {
-                    name: "Dirt",
-                    age: 0,
-                    type: "Dog",
-                    price: 10,
-                    location: [0, 0],
-                },
-                {
-                    name: "Dirt",
-                    age: 0,
-                    type: "Dog",
-                    price: 10,
-                    location: [0, 0],
-                }
-            ]
-        }])
+        let petList = pullData('myPets')
+        setPetList(petList)
         setUpdate(!update)
         setMyPetsUpdate(true)
         setFavoritedUpdate(false)
@@ -133,39 +53,12 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
     }
 
     function favorited() {
-        setPetList([{
-            title: "Dogs",
-            data: [
-                {
-                    name: "Frank",
-                    age: 2,
-                    type: "Dog",
-                    price: 400,
-                    location: [0, 0],
-                },
-            ]
-        }])
+        let petList = pullData('favorited')
+        setPetList(petList)
         setUpdate(!update)
         setMyPetsUpdate(false)
         setFavoritedUpdate(true)
         setRequestsUpdate(false)
-    }
-
-    function requests() {
-        setPetList([{
-            title: "Cats",
-            data: [{
-                name: "Asjal Wants Francine",
-                age: 1000,
-                type: "Cat",
-                price: 100000,
-                location: [0, 0],
-            }]
-        }])
-        setUpdate(!update)
-        setMyPetsUpdate(false)
-        setFavoritedUpdate(false)
-        setRequestsUpdate(true)
     }
     //init whenever the page is loaded 
     useEffect(() => {
@@ -197,9 +90,6 @@ const PetManager: React.FC<Props> = ({ navigation }) => {
                 </TouchableOpacity>
                 <TouchableOpacity style={[styles.topButton, favoritedUpdate && { backgroundColor: '#ffffaa' }]} onPress={favorited}>
                     <Text style={styles.buttonText}>Favorited</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={[styles.topButton, requestsUpdate && { backgroundColor: '#ffffaa' }]} onPress={requests}>
-                    <Text style={styles.buttonText}>Requests</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.listcontainer}>
@@ -249,14 +139,11 @@ const styles = StyleSheet.create({
         fontSize: 30,
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingLeft: 10,
-        paddingRight: 10,
-        marginTop: 10,
+        justifyContent: 'space-evenly',
+        marginTop: 10
     },
     topButton: {
-        paddingLeft: 20,
-        paddingRight: 20,
+        paddingHorizontal: 60,
         paddingTop: 10,
         paddingBottom: 10,
         backgroundColor: 'white',

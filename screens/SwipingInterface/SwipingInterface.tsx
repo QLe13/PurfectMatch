@@ -6,14 +6,15 @@ import { useMemo, useRef, useState } from 'react';
 
 interface Props {
   navigation: any;
+  route: any;
 }
 const db = [
-  { image: require('./petImages/redPanda.png'), id: 1, name: 'Red Panda' },
-  { image: require('./petImages/cat.jpeg'), id: 2, name: 'Cat' },
-  { image: require('./petImages/dog.jpeg'), id: 3, name: 'Dog' }
+  { image: require('./petImages/redPanda.png'), id: 1, name: 'Red Panda', age: 5, type: "Rodent", price: 9000, location: [0, 0] },
+  { image: require('./petImages/cat.jpeg'), id: 2, name: 'Cat', age: 10, type: "Cat", price: 690, location: [0, 0] },
+  { image: require('./petImages/dog.jpeg'), id: 3, name: 'Dog', age: 1, type: "Dog", price: 120, location: [0, 0] }
 ]
 const { width, height } = Dimensions.get('window');
-const SwipingInterface: React.FC<Props> = ({ navigation }: Props) => {
+const SwipingInterface: React.FC<Props> = ({ navigation, route }: Props) => {
   const [data, setData] = useState(db)
   const [activeCard, setActiveCard] = useState(data.length - 1)
   const canSwipe = activeCard >= 0
@@ -32,17 +33,40 @@ const SwipingInterface: React.FC<Props> = ({ navigation }: Props) => {
     }
   }
 
+  const pluralDict: any = {
+    "Cat": "Cats",
+    "Dog": "Dogs",
+    "Fish": "Fish",
+    "Squirrel": "Squirrels",
+    "Reptile": "Reptiles",
+    "Amphibian": "Amphibians",
+    "Racoon": "Raccoons",
+    "Rodent": "Rodents",
+    "Rabbit": "Rabbits",
+    "Spider": "Spiders",
+    "Insect": "Insects",
+    "Pig": "Pigs"
+  }
+
+  const petJSON = route.params.p
 
   function handlePressToProfile() {
-    navigation.navigate('UserProfile');
+    navigation.navigate('UserProfile', { p: petJSON });
   }
   function handlePressToMatchesManager() {
-    navigation.navigate('PetManager');
+    navigation.navigate('PetManager', { p: petJSON });
   }
   function handlePressToFilterSearchInterface() {
-    navigation.navigate('FilterSearch')
+    navigation.navigate('FilterSearch', { p: petJSON })
   }
   const onSwipe = (direction: string) => {
+    let d: any = data[activeCard]
+    if (direction == 'right') {
+      if (!(pluralDict[d.type] in petJSON.favorited)) {
+        petJSON.favorited[pluralDict[d.type]] = []
+      }
+      petJSON.favorited[pluralDict[d.type]].push({ name: d.name, age: d.age, type: d.type, price: d.price, location: d.location })
+    }
     console.log('You swiped: ' + direction)
     setActiveCard(activeCard - 1)
   }

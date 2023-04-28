@@ -10,6 +10,7 @@ import ShowMap from "../ShowMap/ShowMap";
 
 interface Props {
     navigation: any;
+    route: any;
 }
 
 const initPetForm: Pet = {
@@ -21,9 +22,11 @@ const initPetForm: Pet = {
 }
 const { width, height } = Dimensions.get('window')
 
+// let petJSON = fs.readFile('../../pets.json')
+
 const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Rodent", "Rabbit", "Spider", "Insect", "Pig"]
 
-const AddPet: React.FC<Props> = ({ navigation }) => {
+const AddPet: React.FC<Props> = ({ navigation, route }) => {
     const [petForm, setPetForm] = useState<Pet>(initPetForm)
     const [name, setName] = useState<string>('')
     const [age, setAge] = useState<number>(0)
@@ -33,6 +36,22 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
     const [showMap, setShowMap] = useState<boolean>(false)
     const initCoordinates: Coordinate = [0, 0]
 
+    const pluralDict: any = {
+        "Cat": "Cats",
+        "Dog": "Dogs",
+        "Fish": "Fish",
+        "Squirrel": "Squirrels",
+        "Reptile": "Reptiles",
+        "Amphibian": "Amphibians",
+        "Racoon": "Raccoons",
+        "Rodent": "Rodents",
+        "Rabbit": "Rabbits",
+        "Spider": "Spiders",
+        "Insect": "Insects",
+        "Pig": "Pigs"
+    }
+
+    const petJSON = route.params.p
 
     const handleNameChange = (event: NativeSyntheticEvent<TextInputChangeEventData>) => {
         setPetForm({ ...petForm, name: event.nativeEvent.text })
@@ -61,13 +80,17 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
         setLocation([0, 0])
     }
 
-    useEffect(() => {
-        console.log(JSON.stringify(location) === "[0,0]")
-        console.log(JSON.stringify(location))
-    }, [location])
 
     function handlePressToProfile() {
-        navigation.navigate('UserProfile')
+        navigation.navigate('UserProfile', { p: petJSON })
+    }
+    function handleAddPet() {
+        if (!(pluralDict[type] in petJSON.myPets)) {
+            petJSON.myPets[pluralDict[type]] = []
+        }
+        petJSON.myPets[pluralDict[type]].push(petForm)
+        console.log("pet added", petJSON)
+        navigation.navigate('UserProfile', { p: petJSON })
     }
 
     return (
@@ -84,7 +107,7 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
                     source={require('../.././assets/icon.png')}
                     style={{ width: 55, height: 50, alignContent: 'center' }}
                 ></Image>
-                <TouchableOpacity onPress={handlePressToProfile}>
+                <TouchableOpacity onPress={handleAddPet}>
                     <Image
                         source={require('../.././assets/greencheck.png')}
                         style={{ width: 50, height: 50, alignContent: 'center' }}
