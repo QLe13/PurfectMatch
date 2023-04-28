@@ -1,5 +1,7 @@
 import React, { Component, useState } from 'react'
-import { Text, StyleSheet, View, Button, TextInput } from 'react-native'
+import { Text, StyleSheet, View, Button, TextInput, Image, TouchableOpacity } from 'react-native'
+//import { icon } from '../.././assets'
+
 
 interface Props {
   navigation: any;
@@ -26,13 +28,39 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
     setIsEditingLocation(false);
   }
 
+  function handlePressToAddPet() {
+    navigation.navigate('AddPet')
+  }
+
+  function handlePressToSwipeInterface() {
+    navigation.navigate('SwipingInterface')
+  }
+  
+  function handlePressToSearchPet() {
+    navigation.navigate('FilterSearch')
+  }
+
   return (
     <View>
       <View style={styles.header}>
-        <Button title="Add Pet" onPress={()=>{}} />
-        <Text style={styles.headerText}>Purfect Match</Text>
-        <Button title="Find Pet" onPress={()=>{}} />
-      </View>
+        <TouchableOpacity onPress={handlePressToAddPet}>
+          <Image 
+            source={require('../.././assets/plusicon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={handlePressToSwipeInterface}></TouchableOpacity>
+          <Image 
+            source={require('../.././assets/icon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        <TouchableOpacity onPress={handlePressToSearchPet}>
+          <Image 
+            source={require('../.././assets/searchicon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
+        </TouchableOpacity>
+        </View>
       <View style={styles.container}>
         <View style={styles.userNameView}>
             <Text style={styles.userNameText}>{userName}</Text>

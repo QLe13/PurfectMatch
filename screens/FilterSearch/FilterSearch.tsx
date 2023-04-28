@@ -1,8 +1,7 @@
 import React, { Component, useState } from 'react';
-import { ScrollView, Text, StyleSheet, View, Button, TextInput } from 'react-native';
+import { ScrollView, Text, StyleSheet, View, Button, TextInput, Image, TouchableOpacity } from 'react-native';
 import { Slider } from '@miblanchard/react-native-slider';
 import { Picker } from '@react-native-picker/picker';
-import { useNavigation } from '@react-navigation/native';
 import { Chip } from 'react-native-paper';
 
 const petTypes = ["Cat", "Dog", "Fish", "Squirrel", "Reptile", "Amphibian", "Racoon", "Hamster", "Rabbit", "Spider", "Insect"]
@@ -21,6 +20,10 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
   function handlePressToPetManager() {
     navigation.navigate('PetManager');
   }
+  function handlePressToSwipeInterface() {
+    console.log("search")
+    navigation.navigate('SwipingInterface')
+  }
   const handleSelect = (val: string) => {
     setselectedTypes((prev: string[]) =>
       prev.find((p) => p === val)
@@ -29,12 +32,26 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
     );
   };
 
+
   return (
-    <View style={styles.container}>
+    <View style={styles.biggerContainer}>
       <View style={styles.header}>
-        <Button title="Profile" onPress={handlePressToProfile} />
-        <Text style={styles.headerText}>Purfect Match</Text>
-        <Button title="Pet Manager" onPress={handlePressToPetManager} />
+        <TouchableOpacity onPress={handlePressToProfile}>
+          <Image
+            source={require('../.././assets/profileicon.webp')}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
+          ></Image>
+        </TouchableOpacity>
+        <Image
+          source={require('../.././assets/icon.png')}
+          style={{ width: 50, height: 50, alignContent: 'center' }}
+        ></Image>
+        <TouchableOpacity onPress={handlePressToPetManager}>
+          <Image
+            source={require('../.././assets/caticon2.jpg')}
+            style={{ width: 50, height: 70, alignContent: 'center', marginTop: 10 }}
+          ></Image>
+        </TouchableOpacity>
       </View>
       {/* This part ^ is the header of the page, you can reapply it to any page you want */}
 
@@ -116,10 +133,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
             onValueChange={(value) => setSelectedDistance(Number(value))} />
         </View>
         <View>
-          <Button title="Search for purfect match!" onPress={() => (
-            console.log('search')
-
-          )} />
+          <Button title="Search for purfect match!" onPress={handlePressToSwipeInterface} />
         </View>
       </ScrollView>
     </View>
@@ -127,6 +141,9 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
 }
 
 const styles = StyleSheet.create({
+  biggerContainer: {
+    flex: 1,
+  },
   container: {
     flexGrow: 1
   },
