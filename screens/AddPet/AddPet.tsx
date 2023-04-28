@@ -72,6 +72,7 @@ const AddPet: React.FC<Props> = ({navigation}) => {
 
     function handlePressToPetManager() {
         navigation.navigate('PetManager')
+        //Package up user input to send to pet manager
     }
 
     function handlePressToSwipeInterface() {
@@ -97,6 +98,7 @@ const AddPet: React.FC<Props> = ({navigation}) => {
                 <Image 
                     source={require('../.././assets/greencheck.png')}
                     style={{width: 50, height: 50, alignContent: 'center'}}
+
                 ></Image>
             </TouchableOpacity>
         </View>
