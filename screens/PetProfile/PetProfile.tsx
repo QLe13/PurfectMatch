@@ -49,6 +49,13 @@ const PetProfile: React.FC<Props> = ({ navigation, route }) => {
         setPetForm({ ...petForm, location: [0, 0] })
     }
 
+    function handlePressToPetManager() {
+        navigation.navigate('PetManager')
+    }
+
+    function handlePressToSwipeInterface() {
+        navigation.navigate('SwipingInterface')
+    }
 
 
 

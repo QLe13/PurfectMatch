@@ -92,8 +92,8 @@ const SwipingInterface: React.FC<Props> = ({ navigation, route }: Props) => {
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToMatchesManager}>
           <Image
-            source={require('../.././assets/14558.png')}
-            style={{ width: 50, height: 50, alignContent: 'center' }}
+            source={require('../.././assets/caticon2.jpg')}
+            style={{ width: 55, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
       </View>
