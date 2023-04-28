@@ -49,11 +49,12 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
             style={{width: 50, height: 50, alignContent: 'center'}}
           ></Image>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handlePressToSwipeInterface}></TouchableOpacity>
+        <TouchableOpacity onPress={handlePressToSwipeInterface}>
           <Image 
             source={require('../.././assets/icon.png')}
             style={{width: 50, height: 50, alignContent: 'center'}}
           ></Image>
+          </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToSearchPet}>
           <Image 
             source={require('../.././assets/searchicon.png')}
