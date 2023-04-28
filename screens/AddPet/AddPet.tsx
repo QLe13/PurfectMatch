@@ -92,18 +92,16 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
         <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={50} style={{ flex: 1 }}>
             <View style={styles.header}>
                 <TouchableOpacity onPress={handlePressToProfile}>
-                 <Image
+                    <Image
                         source={require('../.././assets/cancel.png')}
                         style={{ width: 50, height: 50, alignContent: 'center' }}
                     ></Image>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressToSwipeInterface}>
-                    <Image
-                        source={require('../.././assets/icon.png')}
-                        style={{ width: 55, height: 50, alignContent: 'center' }}
-                    ></Image>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={handlePressToPetManager}>
+                <Image
+                    source={require('../.././assets/icon.png')}
+                    style={{ width: 55, height: 50, alignContent: 'center' }}
+                ></Image>
+                <TouchableOpacity onPress={handlePressToProfile}>
                     <Image
                         source={require('../.././assets/greencheck.png')}
                         style={{ width: 50, height: 50, alignContent: 'center' }}

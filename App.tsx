@@ -18,13 +18,13 @@ export default function App() {
     <SafeAreaProvider style={{ paddingTop: 50 }}>
       <NavigationContainer>
         <Stack.Navigator initialRouteName='FilterSearch' screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='FilterSearch' component={FilterSearch} />
-          <Stack.Screen name='UserProfile' component={UserProfile} />
-          <Stack.Screen name='MatchesManager' component={MatchesManager} />
-          <Stack.Screen name='SwipingInterface' component={SwipingInterface} />
-          <Stack.Screen name='AddPet' component={AddPet} />
-          <Stack.Screen name='PetManager' component={PetManager} />
-          <Stack.Screen name='PetProfile' component={PetProfile} />
+          <Stack.Screen name='FilterSearch' component={FilterSearch} options={{ presentation: 'containedModal' }} />
+          <Stack.Screen name='UserProfile' component={UserProfile} options={{ presentation: 'modal' }} />
+          <Stack.Screen name='MatchesManager' component={MatchesManager} options={{ presentation: 'modal' }} />
+          <Stack.Screen name='SwipingInterface' component={SwipingInterface} options={{ presentation: 'containedModal' }} />
+          <Stack.Screen name='AddPet' component={AddPet} options={{ presentation: 'modal' }} />
+          <Stack.Screen name='PetManager' component={PetManager} options={{ presentation: 'modal' }} />
+          <Stack.Screen name='PetProfile' component={PetProfile} options={{ presentation: 'modal' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

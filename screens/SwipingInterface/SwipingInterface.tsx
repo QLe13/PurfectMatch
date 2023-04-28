@@ -39,8 +39,8 @@ const SwipingInterface: React.FC<Props> = ({ navigation }: Props) => {
   function handlePressToMatchesManager() {
     navigation.navigate('PetManager');
   }
-  function handlePressToSwipeInterface() {
-    navigation.navigate('SwipingInterface')
+  function handlePressToFilterSearchInterface() {
+    navigation.navigate('FilterSearch')
   }
   const onSwipe = (direction: string) => {
     console.log('You swiped: ' + direction)
@@ -60,10 +60,10 @@ const SwipingInterface: React.FC<Props> = ({ navigation }: Props) => {
             style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handlePressToSwipeInterface}>
+        <TouchableOpacity onPress={handlePressToFilterSearchInterface}>
           <Image
-            source={require('../.././assets/icon.png')}
-            style={{ width: 55, height: 50, alignContent: 'center' }}
+            source={require('../.././assets/searchicon.png')}
+            style={{ width: 50, height: 50, alignContent: 'center' }}
           ></Image>
         </TouchableOpacity>
         <TouchableOpacity onPress={handlePressToMatchesManager}>
