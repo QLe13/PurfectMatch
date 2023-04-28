@@ -32,6 +32,10 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
     navigation.navigate('AddPet')
   }
 
+  function handlePressToSwipeInterface() {
+    navigation.navigate('SwipingInterface')
+  }
+  
   function handlePressToSearchPet() {
     navigation.navigate('FilterSearch')
   }
@@ -45,10 +49,11 @@ const UserProfile: React.FC<Props> = ({ navigation }) => {
             style={{width: 50, height: 50, alignContent: 'center'}}
           ></Image>
         </TouchableOpacity>
-        <Image 
-          source={require('../.././assets/icon.png')}
-          style={{width: 50, height: 50, alignContent: 'center'}}
-        ></Image>
+        <TouchableOpacity onPress={handlePressToSwipeInterface}></TouchableOpacity>
+          <Image 
+            source={require('../.././assets/icon.png')}
+            style={{width: 50, height: 50, alignContent: 'center'}}
+          ></Image>
         <TouchableOpacity onPress={handlePressToSearchPet}>
           <Image 
             source={require('../.././assets/searchicon.png')}

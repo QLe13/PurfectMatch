@@ -38,7 +38,7 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
       <View style={styles.header}>
         <TouchableOpacity onPress = {handlePressToProfile}>
           <Image 
-            source={require('../.././assets/userprofileicon.png')}
+            source={require('../.././assets/profileicon.webp')}
             style={{width: 50, height: 50, alignContent: 'center'}}
           ></Image>
         </TouchableOpacity>
@@ -48,8 +48,8 @@ const FilterSearch: React.FC<Props> = ({ navigation }) => {
         ></Image>
         <TouchableOpacity onPress = {handlePressToPetManager}>  
           <Image 
-            source={require('../.././assets/catfaceicon.jpg')}
-            style={{width: 60, height: 60, alignContent: 'center'}}
+            source={require('../.././assets/caticon2.jpg')}
+            style={{width: 50, height: 70, alignContent: 'center', marginTop: 10}}
           ></Image>
         </TouchableOpacity>
       </View>
