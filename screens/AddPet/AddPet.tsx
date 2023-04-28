@@ -164,6 +164,7 @@ const AddPet: React.FC<Props> = ({ navigation }) => {
                             <ShowMap setLocation={setLocation} setShowMap={setShowMap} />
                         </View>}
                 </View>
+            </View>
             </ScrollView>
         </KeyboardAvoidingView>
     );
